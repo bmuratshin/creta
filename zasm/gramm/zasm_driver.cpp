@@ -156,7 +156,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 		instr.instr = pinst;
 		instr.pos = 0;
 
-		printf(" %s: ", pinst->name_);
+		//printf(" %s: ", pinst->name_);
 		unsigned cnt = 0;
 		if (args)
 		{
@@ -167,17 +167,17 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 
 				switch (elem->_.instr_arg_.type) {
 				case iatDouble:
-					printf(" %g ", mp_.unbox_double(elem->_.instr_arg_.val));
+					//printf(" %g ", mp_.unbox_double(elem->_.instr_arg_.val));
 					break;
 				case iatInt:
 				case iatLong:
-					printf(" %ld ", (long)mp_.unbox_long(elem->_.instr_arg_.val));
+					//printf(" %ld ", (long)mp_.unbox_long(elem->_.instr_arg_.val));
 					break;
 				case iatString:
-					printf(" '%ls' ", (wchar_t*)elem->_.instr_arg_.val);
+					//printf(" '%ls' ", (wchar_t*)elem->_.instr_arg_.val);
 					break;
 				case iatIdent:
-					printf(" %ls ", (wchar_t*)elem->_.instr_arg_.val);
+					//printf(" %ls ", (wchar_t*)elem->_.instr_arg_.val);
 					break;
 				default:
 					assert(0);
@@ -186,7 +186,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 			}
 			END_DO_SET();
 		}
-		printf("\n");
+		//printf("\n");
 		if (cnt < pinst->nargs_)
 			fthrow_("too little args in instruction %s at line %d", pinst->name_, lineno_);
 
@@ -361,7 +361,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 				assert(bit != ccode_bookmarks_.end());
 				uint64_t bkaddr = bit->second;
 				uint64_t pos = it.pos;
-				printf("bookmark %ls, %lx => %lx\n", it.name, (long)bkaddr, (long)pos);
+				//printf("bookmark %ls, %lx => %lx\n", it.name, (long)bkaddr, (long)pos);
 				update64VLuint7(bkaddr, code, pos);
 			}
 
@@ -389,6 +389,16 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 			fprintf(fl, "\n");
 			fclose(fl);
 		}
+
+		{
+			auto bit = ccode_bookmarks_.find(L"initial");
+			if (bit != ccode_bookmarks_.end())
+				printf("Initial code address: 0x%lx\n", (long)bit->second);
+
+			printf("Stack start position: 0x%lx\n", (long)(data_seg_.size() * sizeof (data_seg_[0])));
+
+		}
+
 		return 0;
 	}
 

@@ -52,8 +52,8 @@ void yyerror (yyscan_t yyscanner, zasm_driver_t *driver, char const *msg);
 
 %type <list>	section_list  
 %type <tree>	section data_section xcode_section ccode_section
-%type <list>	data_list data_elem_list ccode_list xcode_list instr_args
-%type <tree>	data_item data_elem ccode_item xcode_item instr_item instr_arg
+%type <list>	data_list data_elem_list code_list instr_args
+%type <tree>	data_item data_elem code_item instr_item instr_arg
 
 
 
@@ -133,27 +133,27 @@ ccode_section
 	{
 		driver->set_in_cf();
 	}
-	'{' ccode_list '}'
+	'{' code_list '}'
 	{
 		driver->test_stop();
 		$$ = NULL;
 	}
 	;
 
-ccode_list
-	: ccode_item
+code_list
+	: code_item
 	{
 		$$ = driver->mp_.cons_set ($1, NULL); 
 		  driver->parse_list_ = $$;
 	}
-	| ccode_list ccode_item
+	| code_list code_item
 	{
 		$$ = driver->mp_.box_set_conc ($1, driver->mp_.cons_set ($2, NULL)); 
 		driver->parse_list_ = $$;
 	}
 	;
 
-ccode_item
+code_item
 	: ZASM_IDENTIFIER ':' 
 	{
 		driver->add_bookmark($1);
@@ -175,38 +175,12 @@ xcode_section
 	{
 		driver->set_in_xf();
 	}
-	'{' xcode_list '}'
+	'{' code_list '}'
 	{
 		driver->test_stop();
 		$$ = NULL;
 	}
 	;
-
-xcode_list
-	: xcode_item
-	{
-		$$ = driver->mp_.cons_set ($1, NULL); 
-		  driver->parse_list_ = $$;
-	}
-	| xcode_list xcode_item
-	{
-		$$ = driver->mp_.box_set_conc ($1, driver->mp_.cons_set ($2, NULL)); 
-		driver->parse_list_ = $$;
-	}
-	;
-
-xcode_item
-	: ZASM_IDENTIFIER ':'  
-	{
-		driver->add_bookmark($1);
-		$$ = NULL;
-	}
-	| instr_item
-	{
-		$$ = NULL;
-	}
-	;
-
 
 /*************************************************************************************/
 

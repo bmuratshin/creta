@@ -139,15 +139,13 @@ enum yysymbol_kind_t
   YYSYMBOL_data_elem = 24,                 /* data_elem  */
   YYSYMBOL_ccode_section = 25,             /* ccode_section  */
   YYSYMBOL_26_1 = 26,                      /* $@1  */
-  YYSYMBOL_ccode_list = 27,                /* ccode_list  */
-  YYSYMBOL_ccode_item = 28,                /* ccode_item  */
+  YYSYMBOL_code_list = 27,                 /* code_list  */
+  YYSYMBOL_code_item = 28,                 /* code_item  */
   YYSYMBOL_xcode_section = 29,             /* xcode_section  */
   YYSYMBOL_30_2 = 30,                      /* $@2  */
-  YYSYMBOL_xcode_list = 31,                /* xcode_list  */
-  YYSYMBOL_xcode_item = 32,                /* xcode_item  */
-  YYSYMBOL_instr_item = 33,                /* instr_item  */
-  YYSYMBOL_instr_args = 34,                /* instr_args  */
-  YYSYMBOL_instr_arg = 35                  /* instr_arg  */
+  YYSYMBOL_instr_item = 31,                /* instr_item  */
+  YYSYMBOL_instr_args = 32,                /* instr_args  */
+  YYSYMBOL_instr_arg = 33                  /* instr_arg  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -475,16 +473,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  12
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   46
+#define YYLAST   43
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  17
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  19
+#define YYNNTS  17
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  33
+#define YYNRULES  29
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  51
+#define YYNSTATES  46
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   267
@@ -536,8 +534,7 @@ static const yytype_uint8 yyrline[] =
 {
        0,    65,    65,    69,    76,    77,    78,    83,    89,    93,
      100,   108,   113,   121,   133,   132,   144,   149,   157,   162,
-     175,   174,   186,   191,   199,   204,   215,   220,   228,   232,
-     239,   243,   247,   251
+     175,   174,   189,   194,   202,   206,   213,   217,   221,   225
 };
 #endif
 
@@ -559,9 +556,8 @@ static const char *const yytname[] =
   "ZASM_INTEGER_LITERAL", "ZASM_PRAGMA", "ZASM_LEXICAL_ERROR", "'{'",
   "'}'", "':'", "';'", "$accept", "section_list", "section",
   "data_section", "data_list", "data_item", "data_elem_list", "data_elem",
-  "ccode_section", "$@1", "ccode_list", "ccode_item", "xcode_section",
-  "$@2", "xcode_list", "xcode_item", "instr_item", "instr_args",
-  "instr_arg", YY_NULLPTR
+  "ccode_section", "$@1", "code_list", "code_item", "xcode_section", "$@2",
+  "instr_item", "instr_args", "instr_arg", YY_NULLPTR
 };
 
 static const char *
@@ -571,7 +567,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-19)
+#define YYPACT_NINF (-8)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -585,12 +581,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      25,   -12,   -19,   -19,    22,   -19,   -19,   -19,   -19,    13,
-      18,    23,   -19,   -19,    24,     5,   -19,    26,    27,    28,
-     -19,   -19,    -5,    29,     6,   -19,   -19,    30,    10,   -19,
-     -19,   -19,     7,   -19,   -19,   -19,   -19,   -19,   -19,    -1,
-     -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,   -19,
-     -19
+      26,    13,    -8,    -8,    19,    -8,    -8,    -8,    -8,    10,
+      14,    21,    -8,    -8,    17,     3,    -8,    27,    27,    28,
+      -8,    -8,    -7,    22,     2,    -8,    -8,     6,    -8,     5,
+      -8,    -8,    -8,    -8,    -8,    -8,    -3,    -8,    -8,    -8,
+      -8,    -8,    -8,    -8,    -8,    -8
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -600,24 +595,23 @@ static const yytype_int8 yydefact[] =
 {
        0,     0,    14,    20,     0,     2,     4,     5,     6,     0,
        0,     0,     1,     3,     0,     0,     8,     0,     0,     0,
-       7,     9,     0,     0,     0,    16,    19,     0,     0,    22,
-      25,    13,     0,    11,    30,    31,    32,    33,    27,     0,
-      28,    18,    15,    17,    24,    21,    23,    10,    12,    26,
-      29
+       7,     9,     0,     0,     0,    16,    19,     0,    13,     0,
+      11,    26,    27,    28,    29,    23,     0,    24,    18,    15,
+      17,    21,    10,    12,    22,    25
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -19,   -19,    33,   -19,   -19,    31,   -19,     8,   -19,   -19,
-     -19,    17,   -19,   -19,   -19,    14,   -18,   -19,     4
+      -8,    -8,    32,    -8,    -8,    24,    -8,    11,    -8,    -8,
+      23,     1,    -8,    -8,    -8,    -8,     7
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     4,     5,     6,    15,    16,    32,    33,     7,    10,
-      24,    25,     8,    11,    28,    29,    26,    39,    40
+       0,     4,     5,     6,    15,    16,    29,    30,     7,    10,
+      24,    25,     8,    11,    26,    36,    37
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -625,20 +619,20 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      30,     9,    34,    35,    36,    37,    34,    35,    36,    37,
-      30,    38,    22,    14,    23,    49,    22,    31,    27,    20,
-      42,    14,    12,    47,    45,     1,     2,     3,     1,     2,
-       3,    17,    22,    22,    23,    27,    18,    13,    31,    19,
-      48,    43,    46,    50,    41,    44,    21
+      31,    32,    33,    34,    31,    32,    33,    34,    22,    35,
+      23,    14,    22,    44,    23,    28,    39,    20,    14,    12,
+      41,    42,     1,     2,     3,    40,     9,    17,    40,     1,
+       2,     3,    19,    22,    18,    23,    13,    38,    28,    21,
+      43,    27,     0,    45
 };
 
 static const yytype_int8 yycheck[] =
 {
-      18,    13,     7,     8,     9,    10,     7,     8,     9,    10,
-      28,    16,     6,     8,     8,    16,     6,    10,     8,    14,
-      14,     8,     0,    16,    14,     3,     4,     5,     3,     4,
-       5,    13,     6,     6,     8,     8,    13,     4,    10,    15,
-      32,    24,    28,    39,    15,    15,    15
+       7,     8,     9,    10,     7,     8,     9,    10,     6,    16,
+       8,     8,     6,    16,     8,    10,    14,    14,     8,     0,
+      14,    16,     3,     4,     5,    24,    13,    13,    27,     3,
+       4,     5,    15,     6,    13,     8,     4,    15,    10,    15,
+      29,    18,    -1,    36
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
@@ -647,10 +641,9 @@ static const yytype_int8 yystos[] =
 {
        0,     3,     4,     5,    18,    19,    20,    25,    29,    13,
       26,    30,     0,    19,     8,    21,    22,    13,    13,    15,
-      14,    22,     6,     8,    27,    28,    33,     8,    31,    32,
-      33,    10,    23,    24,     7,     8,     9,    10,    16,    34,
-      35,    15,    14,    28,    15,    14,    32,    16,    24,    16,
-      35
+      14,    22,     6,     8,    27,    28,    31,    27,    10,    23,
+      24,     7,     8,     9,    10,    16,    32,    33,    15,    14,
+      28,    14,    16,    24,    16,    33
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
@@ -658,8 +651,7 @@ static const yytype_int8 yyr1[] =
 {
        0,    17,    18,    18,    19,    19,    19,    20,    21,    21,
       22,    23,    23,    24,    26,    25,    27,    27,    28,    28,
-      30,    29,    31,    31,    32,    32,    33,    33,    34,    34,
-      35,    35,    35,    35
+      30,    29,    31,    31,    32,    32,    33,    33,    33,    33
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
@@ -667,8 +659,7 @@ static const yytype_int8 yyr2[] =
 {
        0,     2,     1,     2,     1,     1,     1,     4,     1,     2,
        4,     1,     2,     1,     0,     5,     1,     2,     2,     1,
-       0,     5,     1,     2,     2,     1,     3,     2,     1,     2,
-       1,     1,     1,     1
+       0,     5,     3,     2,     1,     2,     1,     1,     1,     1
 };
 
 
@@ -1146,7 +1137,7 @@ yyreduce:
         {
 		(yyval.list) = driver->mp_.cons_set ((yyvsp[0].tree), NULL); 
 	}
-#line 1150 "zasm_parser.cpp"
+#line 1141 "zasm_parser.cpp"
     break;
 
   case 3: /* section_list: section_list section  */
@@ -1154,7 +1145,7 @@ yyreduce:
         {
 		(yyval.list) = driver->mp_.box_set_conc ((yyvsp[-1].list), driver->mp_.cons_set ((yyvsp[0].tree), NULL)); 
 	}
-#line 1158 "zasm_parser.cpp"
+#line 1149 "zasm_parser.cpp"
     break;
 
   case 7: /* data_section: ZASM_DATA_SECTION '{' data_list '}'  */
@@ -1162,7 +1153,7 @@ yyreduce:
         {
 		(yyval.tree) = NULL;
 	}
-#line 1166 "zasm_parser.cpp"
+#line 1157 "zasm_parser.cpp"
     break;
 
   case 8: /* data_list: data_item  */
@@ -1170,7 +1161,7 @@ yyreduce:
         {
 		(yyval.list) = NULL;
 	}
-#line 1174 "zasm_parser.cpp"
+#line 1165 "zasm_parser.cpp"
     break;
 
   case 9: /* data_list: data_list data_item  */
@@ -1178,7 +1169,7 @@ yyreduce:
         {
 		(yyval.list) = NULL;
 	}
-#line 1182 "zasm_parser.cpp"
+#line 1173 "zasm_parser.cpp"
     break;
 
   case 10: /* data_item: ZASM_IDENTIFIER ':' data_elem_list ';'  */
@@ -1187,7 +1178,7 @@ yyreduce:
 		driver->add_var(driver->mp_.box_string((yyvsp[-3].wstrval)), (yyvsp[-1].list));
 		(yyval.tree) = NULL;
 	}
-#line 1191 "zasm_parser.cpp"
+#line 1182 "zasm_parser.cpp"
     break;
 
   case 11: /* data_elem_list: data_elem  */
@@ -1196,7 +1187,7 @@ yyreduce:
 		(yyval.list) = driver->mp_.cons_set ((yyvsp[0].tree), NULL); 
 		  driver->parse_list_ = (yyval.list);
 	}
-#line 1200 "zasm_parser.cpp"
+#line 1191 "zasm_parser.cpp"
     break;
 
   case 12: /* data_elem_list: data_elem_list data_elem  */
@@ -1205,7 +1196,7 @@ yyreduce:
 		(yyval.list) = driver->mp_.box_set_conc ((yyvsp[-1].list), driver->mp_.cons_set ((yyvsp[0].tree), NULL)); 
 		driver->parse_list_ = (yyval.list);
 	}
-#line 1209 "zasm_parser.cpp"
+#line 1200 "zasm_parser.cpp"
     break;
 
   case 13: /* data_elem: ZASM_INTEGER_LITERAL  */
@@ -1215,7 +1206,7 @@ yyreduce:
 		*ptr = (yyvsp[0].intval);
 		(yyval.tree) = (TT*)driver->list (3, ZASM_DATAITEM, 4 /* int32 */, ptr); 
 	}
-#line 1219 "zasm_parser.cpp"
+#line 1210 "zasm_parser.cpp"
     break;
 
   case 14: /* $@1: %empty  */
@@ -1223,51 +1214,51 @@ yyreduce:
         {
 		driver->set_in_cf();
 	}
-#line 1227 "zasm_parser.cpp"
+#line 1218 "zasm_parser.cpp"
     break;
 
-  case 15: /* ccode_section: ZASM_CCODE_SECTION $@1 '{' ccode_list '}'  */
+  case 15: /* ccode_section: ZASM_CCODE_SECTION $@1 '{' code_list '}'  */
 #line 137 "zasm.y"
         {
 		driver->test_stop();
 		(yyval.tree) = NULL;
 	}
-#line 1236 "zasm_parser.cpp"
+#line 1227 "zasm_parser.cpp"
     break;
 
-  case 16: /* ccode_list: ccode_item  */
+  case 16: /* code_list: code_item  */
 #line 145 "zasm.y"
         {
 		(yyval.list) = driver->mp_.cons_set ((yyvsp[0].tree), NULL); 
 		  driver->parse_list_ = (yyval.list);
 	}
-#line 1245 "zasm_parser.cpp"
+#line 1236 "zasm_parser.cpp"
     break;
 
-  case 17: /* ccode_list: ccode_list ccode_item  */
+  case 17: /* code_list: code_list code_item  */
 #line 150 "zasm.y"
         {
 		(yyval.list) = driver->mp_.box_set_conc ((yyvsp[-1].list), driver->mp_.cons_set ((yyvsp[0].tree), NULL)); 
 		driver->parse_list_ = (yyval.list);
 	}
-#line 1254 "zasm_parser.cpp"
+#line 1245 "zasm_parser.cpp"
     break;
 
-  case 18: /* ccode_item: ZASM_IDENTIFIER ':'  */
+  case 18: /* code_item: ZASM_IDENTIFIER ':'  */
 #line 158 "zasm.y"
         {
 		driver->add_bookmark((yyvsp[-1].wstrval));
 		(yyval.tree) = NULL;
 	}
-#line 1263 "zasm_parser.cpp"
+#line 1254 "zasm_parser.cpp"
     break;
 
-  case 19: /* ccode_item: instr_item  */
+  case 19: /* code_item: instr_item  */
 #line 163 "zasm.y"
         {
 		(yyval.tree) = NULL;
 	}
-#line 1271 "zasm_parser.cpp"
+#line 1262 "zasm_parser.cpp"
     break;
 
   case 20: /* $@2: %empty  */
@@ -1275,121 +1266,86 @@ yyreduce:
         {
 		driver->set_in_xf();
 	}
-#line 1279 "zasm_parser.cpp"
+#line 1270 "zasm_parser.cpp"
     break;
 
-  case 21: /* xcode_section: ZASM_XCODE_SECTION $@2 '{' xcode_list '}'  */
+  case 21: /* xcode_section: ZASM_XCODE_SECTION $@2 '{' code_list '}'  */
 #line 179 "zasm.y"
         {
 		driver->test_stop();
 		(yyval.tree) = NULL;
 	}
-#line 1288 "zasm_parser.cpp"
+#line 1279 "zasm_parser.cpp"
     break;
 
-  case 22: /* xcode_list: xcode_item  */
-#line 187 "zasm.y"
-        {
-		(yyval.list) = driver->mp_.cons_set ((yyvsp[0].tree), NULL); 
-		  driver->parse_list_ = (yyval.list);
-	}
-#line 1297 "zasm_parser.cpp"
-    break;
-
-  case 23: /* xcode_list: xcode_list xcode_item  */
-#line 192 "zasm.y"
-        {
-		(yyval.list) = driver->mp_.box_set_conc ((yyvsp[-1].list), driver->mp_.cons_set ((yyvsp[0].tree), NULL)); 
-		driver->parse_list_ = (yyval.list);
-	}
-#line 1306 "zasm_parser.cpp"
-    break;
-
-  case 24: /* xcode_item: ZASM_IDENTIFIER ':'  */
-#line 200 "zasm.y"
-        {
-		driver->add_bookmark((yyvsp[-1].wstrval));
-		(yyval.tree) = NULL;
-	}
-#line 1315 "zasm_parser.cpp"
-    break;
-
-  case 25: /* xcode_item: instr_item  */
-#line 205 "zasm.y"
-        {
-		(yyval.tree) = NULL;
-	}
-#line 1323 "zasm_parser.cpp"
-    break;
-
-  case 26: /* instr_item: ZASM_INSTR instr_args ';'  */
-#line 216 "zasm.y"
+  case 22: /* instr_item: ZASM_INSTR instr_args ';'  */
+#line 190 "zasm.y"
         {
 		driver->add_instr((yyvsp[-2].instr), (yyvsp[-1].list));
 		(yyval.tree) = NULL;
 	}
-#line 1332 "zasm_parser.cpp"
+#line 1288 "zasm_parser.cpp"
     break;
 
-  case 27: /* instr_item: ZASM_INSTR ';'  */
-#line 221 "zasm.y"
+  case 23: /* instr_item: ZASM_INSTR ';'  */
+#line 195 "zasm.y"
         {
 		driver->add_instr((yyvsp[-1].instr), NULL);
 		(yyval.tree) = NULL;
 	}
-#line 1341 "zasm_parser.cpp"
+#line 1297 "zasm_parser.cpp"
     break;
 
-  case 28: /* instr_args: instr_arg  */
-#line 229 "zasm.y"
+  case 24: /* instr_args: instr_arg  */
+#line 203 "zasm.y"
         {
 		(yyval.list) = driver->mp_.cons_set ((yyvsp[0].tree), NULL); 
 	}
-#line 1349 "zasm_parser.cpp"
+#line 1305 "zasm_parser.cpp"
     break;
 
-  case 29: /* instr_args: instr_args instr_arg  */
-#line 233 "zasm.y"
+  case 25: /* instr_args: instr_args instr_arg  */
+#line 207 "zasm.y"
         {
 		(yyval.list) = driver->mp_.box_set_conc ((yyvsp[-1].list), driver->mp_.cons_set ((yyvsp[0].tree), NULL)); 
 	}
-#line 1357 "zasm_parser.cpp"
+#line 1313 "zasm_parser.cpp"
     break;
 
-  case 30: /* instr_arg: ZASM_FLOAT_LITERAL  */
-#line 240 "zasm.y"
+  case 26: /* instr_arg: ZASM_FLOAT_LITERAL  */
+#line 214 "zasm.y"
         {
 		(yyval.tree) = (TT*)driver->list (3, ZASM_INSTR_ARG, instrArgTypes::iatDouble, driver->mp_.box_double((yyvsp[0].floatval))); 
 	}
-#line 1365 "zasm_parser.cpp"
+#line 1321 "zasm_parser.cpp"
     break;
 
-  case 31: /* instr_arg: ZASM_IDENTIFIER  */
-#line 244 "zasm.y"
+  case 27: /* instr_arg: ZASM_IDENTIFIER  */
+#line 218 "zasm.y"
         {
 		(yyval.tree) = (TT*)driver->list (3, ZASM_INSTR_ARG, instrArgTypes::iatIdent, driver->mp_.box_string((yyvsp[0].wstrval))); 
 	}
-#line 1373 "zasm_parser.cpp"
+#line 1329 "zasm_parser.cpp"
     break;
 
-  case 32: /* instr_arg: ZASM_STRING_LITERAL  */
-#line 248 "zasm.y"
+  case 28: /* instr_arg: ZASM_STRING_LITERAL  */
+#line 222 "zasm.y"
         {
 		(yyval.tree) = (TT*)driver->list (3, ZASM_INSTR_ARG, instrArgTypes::iatLong, driver->mp_.box_string((yyvsp[0].strval))); 
 	}
-#line 1381 "zasm_parser.cpp"
+#line 1337 "zasm_parser.cpp"
     break;
 
-  case 33: /* instr_arg: ZASM_INTEGER_LITERAL  */
-#line 252 "zasm.y"
+  case 29: /* instr_arg: ZASM_INTEGER_LITERAL  */
+#line 226 "zasm.y"
         {
 		(yyval.tree) = (TT*)driver->list (3, ZASM_INSTR_ARG, instrArgTypes::iatLong, driver->mp_.box_long((yyvsp[0].intval))); 
 	}
-#line 1389 "zasm_parser.cpp"
+#line 1345 "zasm_parser.cpp"
     break;
 
 
-#line 1393 "zasm_parser.cpp"
+#line 1349 "zasm_parser.cpp"
 
       default: break;
     }
@@ -1582,7 +1538,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 258 "zasm.y"
+#line 232 "zasm.y"
 
 
 
