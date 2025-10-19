@@ -1,0 +1,29 @@
+#pragma once
+
+enum box_type {
+  BT_FIRST_UNUSED =           32,
+  BT_ARRAY_OF_POINTER,
+  BT_LIST_OF_POINTER,
+  BT_INT,
+  BT_LONG_INT,
+  BT_STRING,
+  BT_DOUBLE,
+
+  BT_NULL,
+  BT_DB_NULL,
+  BT_WIDE,
+  BT_NUMERIC,
+  BT_DATE,
+  BT_DATETIME,
+  BT_TIME,
+  BT_TIMESTAMP,
+  BT_BIN,
+  BT_BLOB,
+  BT_BLOB_BIN,
+  BT_BLOB_WIDE,
+  BT_SYMBOL,
+  BT_OBE_LITERAL,
+  BT_SHAPE,
+  BT_RASTER,
+};
+

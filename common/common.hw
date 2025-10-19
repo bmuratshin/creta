@@ -1,0 +1,33 @@
+// must be identical with hwcommon.h 
+`default_nettype none
+`define WORD_WIDTH 32
+`define DECODER_MEM_ADDR_WIDTH 6
+`define DECODER_MEM_DATA_WIDTH 8
+`define DECODER_MEM_DATA_DEPTH 64
+`define STACK_MEM_ADDR_WIDTH 8
+`define STACK_MEM_DATA_WIDTH 32
+`define STACK_STEP 4	// STACK_MEM_DATA_WIDTH in bytes
+`define STACK_MEM_DATA_DEPTH 256
+`define INSTR_WIDTH 16
+`define FIFO_ITEM_WIDTH (`DECODER_MEM_ADDR_WIDTH+`INSTR_WIDTH)
+
+
+`define ioCSstop  0
+`define ioCSnop   1
+`define ioCSexec  2
+`define ioCScall  3
+`define ioCSif    4
+`define ioCSret   5
+`define ioCSgoto  6
+
+`define ioCXstop      0
+`define ioCXimdpush   1
+`define ioCXlocpush   2
+`define ioCXeval      3
+`define ioCXcmp       4
+`define ioCXadd       5
+`define ioCXsub       6
+`define ioCXmul       7
+`define ioCXdiv       8
+`define ioCXvarpush   9
+`define ioCXvarpushd  10
