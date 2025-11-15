@@ -21,9 +21,6 @@
     <ClCompile Include="zasm.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Getopt.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="gramm\vc.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -36,26 +33,26 @@
     <ClCompile Include="gramm\zasm_scanner.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="gramm\box.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="gramm\mempool.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="gramm\multibyte.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="gramm\utils.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\common\instr.cpp">
       <Filter>Исходные файлы\common</Filter>
     </ClCompile>
+    <ClCompile Include="..\common\box.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\mempool.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\multibyte.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\utils.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\Getopt.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Optarg.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
     <ClInclude Include="gramm\zasm_driver.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
@@ -63,21 +60,6 @@
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="gramm\zasm_scanner.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="gramm\box.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="gramm\mempool.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="gramm\multibyte.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="gramm\btcodes.h">
-      <Filter>Исходные файлы</Filter>
-    </ClInclude>
-    <ClInclude Include="gramm\utils.h">
       <Filter>Исходные файлы</Filter>
     </ClInclude>
     <ClInclude Include="..\common\instr.h">
@@ -88,6 +70,24 @@
     </ClInclude>
     <ClInclude Include="gramm\zasm_tree.h">
       <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\box.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\btcodes.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\mempool.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\multibyte.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\utils.h">
+      <Filter>Исходные файлы</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\Optarg.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

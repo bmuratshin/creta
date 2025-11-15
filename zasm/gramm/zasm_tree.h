@@ -1,6 +1,6 @@
 #pragma once
 
-#include "box.h"
+#include "../../common/box.h"
 #include "../../common/instr.h"
 
 enum zasm_tree_type {

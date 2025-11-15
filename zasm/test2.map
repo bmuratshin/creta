@@ -1,0 +1,18 @@
+DATA:
+
+CCODE:
+	 @endif_1: 0x31
+	 @endif_2: 0x3e
+	 @thencode_1: 0x2e
+	 @thencode_2: 0x36
+	 a: 0x29
+	 main: 0x4c
+
+CCODE:
+	 @blk_1: 0x0
+	 @blk_2: 0x5
+	 @blk_3: 0xd
+	 @blk_4: 0x12
+	 @blk_5: 0x19
+	 @blk_6: 0x26
+

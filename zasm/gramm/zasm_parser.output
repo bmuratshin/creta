@@ -1,0 +1,575 @@
+Terminals unused in grammar
+
+    ZASM_PRAGMA
+    ZASM_LEXICAL_ERROR
+
+
+Grammar
+
+    0 $accept: section_list $end
+
+    1 section_list: section
+    2             | section_list section
+
+    3 section: data_section
+    4        | ccode_section
+    5        | xcode_section
+
+    6 data_section: ZASM_DATA_SECTION '{' data_list '}'
+
+    7 data_list: data_item
+    8          | data_list data_item
+
+    9 data_item: ZASM_IDENTIFIER ':' data_elem_list ';'
+
+   10 data_elem_list: data_elem
+   11               | data_elem_list data_elem
+
+   12 data_elem: ZASM_INTEGER_LITERAL
+
+   13 $@1: %empty
+
+   14 ccode_section: ZASM_CCODE_SECTION $@1 '{' code_list '}'
+
+   15 code_list: code_item
+   16          | code_list code_item
+
+   17 code_item: ZASM_IDENTIFIER ':'
+   18          | instr_item
+
+   19 $@2: %empty
+
+   20 xcode_section: ZASM_XCODE_SECTION $@2 '{' code_list '}'
+
+   21 instr_item: ZASM_INSTR instr_args ';'
+   22           | ZASM_INSTR ';'
+
+   23 instr_args: instr_arg
+   24           | instr_args instr_arg
+
+   25 instr_arg: ZASM_FLOAT_LITERAL
+   26          | ZASM_IDENTIFIER
+   27          | ZASM_STRING_LITERAL
+   28          | ZASM_INTEGER_LITERAL
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    ':' (58) 9 17
+    ';' (59) 9 21 22
+    '{' (123) 6 14 20
+    '}' (125) 6 14 20
+    error (256)
+    ZASM_DATA_SECTION (258) 6
+    ZASM_CCODE_SECTION (259) 14
+    ZASM_XCODE_SECTION (260) 20
+    ZASM_INSTR <instr> (261) 21 22
+    ZASM_FLOAT_LITERAL <floatval> (262) 25
+    ZASM_IDENTIFIER <wstrval> (263) 9 17 26
+    ZASM_STRING_LITERAL <strval> (264) 27
+    ZASM_INTEGER_LITERAL <intval> (265) 12 28
+    ZASM_PRAGMA <strval> (266)
+    ZASM_LEXICAL_ERROR (267)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (17)
+        on left: 0
+    section_list <list> (18)
+        on left: 1 2
+        on right: 0 2
+    section <tree> (19)
+        on left: 3 4 5
+        on right: 1 2
+    data_section <tree> (20)
+        on left: 6
+        on right: 3
+    data_list <list> (21)
+        on left: 7 8
+        on right: 6 8
+    data_item <tree> (22)
+        on left: 9
+        on right: 7 8
+    data_elem_list <list> (23)
+        on left: 10 11
+        on right: 9 11
+    data_elem <tree> (24)
+        on left: 12
+        on right: 10 11
+    ccode_section <tree> (25)
+        on left: 14
+        on right: 4
+    $@1 (26)
+        on left: 13
+        on right: 14
+    code_list <list> (27)
+        on left: 15 16
+        on right: 14 16 20
+    code_item <tree> (28)
+        on left: 17 18
+        on right: 15 16
+    xcode_section <tree> (29)
+        on left: 20
+        on right: 5
+    $@2 (30)
+        on left: 19
+        on right: 20
+    instr_item <tree> (31)
+        on left: 21 22
+        on right: 18
+    instr_args <list> (32)
+        on left: 23 24
+        on right: 21 24
+    instr_arg <tree> (33)
+        on left: 25 26 27 28
+        on right: 23 24
+
+
+State 0
+
+    0 $accept: . section_list $end
+    1 section_list: . section
+    2             | . section_list section
+    3 section: . data_section
+    4        | . ccode_section
+    5        | . xcode_section
+    6 data_section: . ZASM_DATA_SECTION '{' data_list '}'
+   14 ccode_section: . ZASM_CCODE_SECTION $@1 '{' code_list '}'
+   20 xcode_section: . ZASM_XCODE_SECTION $@2 '{' code_list '}'
+
+    ZASM_DATA_SECTION   shift, and go to state 1
+    ZASM_CCODE_SECTION  shift, and go to state 2
+    ZASM_XCODE_SECTION  shift, and go to state 3
+
+    section_list   go to state 4
+    section        go to state 5
+    data_section   go to state 6
+    ccode_section  go to state 7
+    xcode_section  go to state 8
+
+
+State 1
+
+    6 data_section: ZASM_DATA_SECTION . '{' data_list '}'
+
+    '{'  shift, and go to state 9
+
+
+State 2
+
+   13 $@1: %empty .
+   14 ccode_section: ZASM_CCODE_SECTION . $@1 '{' code_list '}'
+
+    $default  reduce using rule 13 ($@1)
+
+    $@1  go to state 10
+
+
+State 3
+
+   19 $@2: %empty .
+   20 xcode_section: ZASM_XCODE_SECTION . $@2 '{' code_list '}'
+
+    $default  reduce using rule 19 ($@2)
+
+    $@2  go to state 11
+
+
+State 4
+
+    0 $accept: section_list . $end
+    2 section_list: section_list . section
+    3 section: . data_section
+    4        | . ccode_section
+    5        | . xcode_section
+    6 data_section: . ZASM_DATA_SECTION '{' data_list '}'
+   14 ccode_section: . ZASM_CCODE_SECTION $@1 '{' code_list '}'
+   20 xcode_section: . ZASM_XCODE_SECTION $@2 '{' code_list '}'
+
+    $end                shift, and go to state 12
+    ZASM_DATA_SECTION   shift, and go to state 1
+    ZASM_CCODE_SECTION  shift, and go to state 2
+    ZASM_XCODE_SECTION  shift, and go to state 3
+
+    section        go to state 13
+    data_section   go to state 6
+    ccode_section  go to state 7
+    xcode_section  go to state 8
+
+
+State 5
+
+    1 section_list: section .
+
+    $default  reduce using rule 1 (section_list)
+
+
+State 6
+
+    3 section: data_section .
+
+    $default  reduce using rule 3 (section)
+
+
+State 7
+
+    4 section: ccode_section .
+
+    $default  reduce using rule 4 (section)
+
+
+State 8
+
+    5 section: xcode_section .
+
+    $default  reduce using rule 5 (section)
+
+
+State 9
+
+    6 data_section: ZASM_DATA_SECTION '{' . data_list '}'
+    7 data_list: . data_item
+    8          | . data_list data_item
+    9 data_item: . ZASM_IDENTIFIER ':' data_elem_list ';'
+
+    ZASM_IDENTIFIER  shift, and go to state 14
+
+    data_list  go to state 15
+    data_item  go to state 16
+
+
+State 10
+
+   14 ccode_section: ZASM_CCODE_SECTION $@1 . '{' code_list '}'
+
+    '{'  shift, and go to state 17
+
+
+State 11
+
+   20 xcode_section: ZASM_XCODE_SECTION $@2 . '{' code_list '}'
+
+    '{'  shift, and go to state 18
+
+
+State 12
+
+    0 $accept: section_list $end .
+
+    $default  accept
+
+
+State 13
+
+    2 section_list: section_list section .
+
+    $default  reduce using rule 2 (section_list)
+
+
+State 14
+
+    9 data_item: ZASM_IDENTIFIER . ':' data_elem_list ';'
+
+    ':'  shift, and go to state 19
+
+
+State 15
+
+    6 data_section: ZASM_DATA_SECTION '{' data_list . '}'
+    8 data_list: data_list . data_item
+    9 data_item: . ZASM_IDENTIFIER ':' data_elem_list ';'
+
+    ZASM_IDENTIFIER  shift, and go to state 14
+    '}'              shift, and go to state 20
+
+    data_item  go to state 21
+
+
+State 16
+
+    7 data_list: data_item .
+
+    $default  reduce using rule 7 (data_list)
+
+
+State 17
+
+   14 ccode_section: ZASM_CCODE_SECTION $@1 '{' . code_list '}'
+   15 code_list: . code_item
+   16          | . code_list code_item
+   17 code_item: . ZASM_IDENTIFIER ':'
+   18          | . instr_item
+   21 instr_item: . ZASM_INSTR instr_args ';'
+   22           | . ZASM_INSTR ';'
+
+    ZASM_INSTR       shift, and go to state 22
+    ZASM_IDENTIFIER  shift, and go to state 23
+
+    code_list   go to state 24
+    code_item   go to state 25
+    instr_item  go to state 26
+
+
+State 18
+
+   15 code_list: . code_item
+   16          | . code_list code_item
+   17 code_item: . ZASM_IDENTIFIER ':'
+   18          | . instr_item
+   20 xcode_section: ZASM_XCODE_SECTION $@2 '{' . code_list '}'
+   21 instr_item: . ZASM_INSTR instr_args ';'
+   22           | . ZASM_INSTR ';'
+
+    ZASM_INSTR       shift, and go to state 22
+    ZASM_IDENTIFIER  shift, and go to state 23
+
+    code_list   go to state 27
+    code_item   go to state 25
+    instr_item  go to state 26
+
+
+State 19
+
+    9 data_item: ZASM_IDENTIFIER ':' . data_elem_list ';'
+   10 data_elem_list: . data_elem
+   11               | . data_elem_list data_elem
+   12 data_elem: . ZASM_INTEGER_LITERAL
+
+    ZASM_INTEGER_LITERAL  shift, and go to state 28
+
+    data_elem_list  go to state 29
+    data_elem       go to state 30
+
+
+State 20
+
+    6 data_section: ZASM_DATA_SECTION '{' data_list '}' .
+
+    $default  reduce using rule 6 (data_section)
+
+
+State 21
+
+    8 data_list: data_list data_item .
+
+    $default  reduce using rule 8 (data_list)
+
+
+State 22
+
+   21 instr_item: ZASM_INSTR . instr_args ';'
+   22           | ZASM_INSTR . ';'
+   23 instr_args: . instr_arg
+   24           | . instr_args instr_arg
+   25 instr_arg: . ZASM_FLOAT_LITERAL
+   26          | . ZASM_IDENTIFIER
+   27          | . ZASM_STRING_LITERAL
+   28          | . ZASM_INTEGER_LITERAL
+
+    ZASM_FLOAT_LITERAL    shift, and go to state 31
+    ZASM_IDENTIFIER       shift, and go to state 32
+    ZASM_STRING_LITERAL   shift, and go to state 33
+    ZASM_INTEGER_LITERAL  shift, and go to state 34
+    ';'                   shift, and go to state 35
+
+    instr_args  go to state 36
+    instr_arg   go to state 37
+
+
+State 23
+
+   17 code_item: ZASM_IDENTIFIER . ':'
+
+    ':'  shift, and go to state 38
+
+
+State 24
+
+   14 ccode_section: ZASM_CCODE_SECTION $@1 '{' code_list . '}'
+   16 code_list: code_list . code_item
+   17 code_item: . ZASM_IDENTIFIER ':'
+   18          | . instr_item
+   21 instr_item: . ZASM_INSTR instr_args ';'
+   22           | . ZASM_INSTR ';'
+
+    ZASM_INSTR       shift, and go to state 22
+    ZASM_IDENTIFIER  shift, and go to state 23
+    '}'              shift, and go to state 39
+
+    code_item   go to state 40
+    instr_item  go to state 26
+
+
+State 25
+
+   15 code_list: code_item .
+
+    $default  reduce using rule 15 (code_list)
+
+
+State 26
+
+   18 code_item: instr_item .
+
+    $default  reduce using rule 18 (code_item)
+
+
+State 27
+
+   16 code_list: code_list . code_item
+   17 code_item: . ZASM_IDENTIFIER ':'
+   18          | . instr_item
+   20 xcode_section: ZASM_XCODE_SECTION $@2 '{' code_list . '}'
+   21 instr_item: . ZASM_INSTR instr_args ';'
+   22           | . ZASM_INSTR ';'
+
+    ZASM_INSTR       shift, and go to state 22
+    ZASM_IDENTIFIER  shift, and go to state 23
+    '}'              shift, and go to state 41
+
+    code_item   go to state 40
+    instr_item  go to state 26
+
+
+State 28
+
+   12 data_elem: ZASM_INTEGER_LITERAL .
+
+    $default  reduce using rule 12 (data_elem)
+
+
+State 29
+
+    9 data_item: ZASM_IDENTIFIER ':' data_elem_list . ';'
+   11 data_elem_list: data_elem_list . data_elem
+   12 data_elem: . ZASM_INTEGER_LITERAL
+
+    ZASM_INTEGER_LITERAL  shift, and go to state 28
+    ';'                   shift, and go to state 42
+
+    data_elem  go to state 43
+
+
+State 30
+
+   10 data_elem_list: data_elem .
+
+    $default  reduce using rule 10 (data_elem_list)
+
+
+State 31
+
+   25 instr_arg: ZASM_FLOAT_LITERAL .
+
+    $default  reduce using rule 25 (instr_arg)
+
+
+State 32
+
+   26 instr_arg: ZASM_IDENTIFIER .
+
+    $default  reduce using rule 26 (instr_arg)
+
+
+State 33
+
+   27 instr_arg: ZASM_STRING_LITERAL .
+
+    $default  reduce using rule 27 (instr_arg)
+
+
+State 34
+
+   28 instr_arg: ZASM_INTEGER_LITERAL .
+
+    $default  reduce using rule 28 (instr_arg)
+
+
+State 35
+
+   22 instr_item: ZASM_INSTR ';' .
+
+    $default  reduce using rule 22 (instr_item)
+
+
+State 36
+
+   21 instr_item: ZASM_INSTR instr_args . ';'
+   24 instr_args: instr_args . instr_arg
+   25 instr_arg: . ZASM_FLOAT_LITERAL
+   26          | . ZASM_IDENTIFIER
+   27          | . ZASM_STRING_LITERAL
+   28          | . ZASM_INTEGER_LITERAL
+
+    ZASM_FLOAT_LITERAL    shift, and go to state 31
+    ZASM_IDENTIFIER       shift, and go to state 32
+    ZASM_STRING_LITERAL   shift, and go to state 33
+    ZASM_INTEGER_LITERAL  shift, and go to state 34
+    ';'                   shift, and go to state 44
+
+    instr_arg  go to state 45
+
+
+State 37
+
+   23 instr_args: instr_arg .
+
+    $default  reduce using rule 23 (instr_args)
+
+
+State 38
+
+   17 code_item: ZASM_IDENTIFIER ':' .
+
+    $default  reduce using rule 17 (code_item)
+
+
+State 39
+
+   14 ccode_section: ZASM_CCODE_SECTION $@1 '{' code_list '}' .
+
+    $default  reduce using rule 14 (ccode_section)
+
+
+State 40
+
+   16 code_list: code_list code_item .
+
+    $default  reduce using rule 16 (code_list)
+
+
+State 41
+
+   20 xcode_section: ZASM_XCODE_SECTION $@2 '{' code_list '}' .
+
+    $default  reduce using rule 20 (xcode_section)
+
+
+State 42
+
+    9 data_item: ZASM_IDENTIFIER ':' data_elem_list ';' .
+
+    $default  reduce using rule 9 (data_item)
+
+
+State 43
+
+   11 data_elem_list: data_elem_list data_elem .
+
+    $default  reduce using rule 11 (data_elem_list)
+
+
+State 44
+
+   21 instr_item: ZASM_INSTR instr_args ';' .
+
+    $default  reduce using rule 21 (instr_item)
+
+
+State 45
+
+   24 instr_args: instr_args instr_arg .
+
+    $default  reduce using rule 24 (instr_args)

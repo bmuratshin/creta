@@ -9,7 +9,7 @@
 #define ALIGN_8(x)    _RNDUP((x), 8)
 #define ALIGN_16(x)    _RNDUP((x), 16)
 
-	typedef unsigned char dtp_t;
+	typedef unsigned char tag_t;
 	typedef void * box_t;
 
 	struct s_node_t
@@ -50,29 +50,29 @@
     (box_mp_t::box_length ((char*) (b)) / sizeof (char*))
 
 #ifdef _MSC_VER
-#define _DO_BOX(dtp, inx, arr) \
+#define _DO_BOX(tag, inx, arr) \
     for ((inx) = 0; (inx) < (long)((arr) ? BOX_ELEMENTS (arr) : 0); (inx) ++) \
       {
 #else
-#define _DO_BOX(dtp, inx, arr) \
+#define _DO_BOX(tag, inx, arr) \
     for ((inx) = 0; (inx) < ((arr) ? BOX_ELEMENTS(arr) : 0); (inx) ++) \
       {
 #endif
 
-#define DO_BOX(dtp, v, inx, arr) \
-    _DO_BOX((dtp), (inx), (arr)) \
-        dtp v = (dtp) (arr) [inx];
+#define DO_BOX(tag, v, inx, arr) \
+    _DO_BOX((tag), (inx), (arr)) \
+        tag v = (tag) (arr) [inx];
 
 
 
 #define END_DO_BOX \
       }
 
-	inline dtp_t box_tag(const void *box) {
-		return (*((dtp_t *) &(((const unsigned char *)(box))[-1])));
+	inline tag_t box_tag(const void *box) {
+		return (*((tag_t *) &(((const unsigned char *)(box))[-1])));
 	}
-	inline void set_box_tag(box_t box, dtp_t tag) {
-		*((dtp_t *) &(((unsigned char *)(box))[-1])) = tag; 
+	inline void set_box_tag(box_t box, tag_t tag) {
+		*((tag_t *) &(((unsigned char *)(box))[-1])) = tag; 
 	}
 
 	/*
@@ -80,43 +80,23 @@
 	 * for the sake of convenience. Even is a segmented
 	 * architecture this would be an invalid pointer.
 	 */
-#define SMALLEST_POSSIBLE_POINTER 10000
+#define SMALLEST_POSSIBLE_POINTER (1<<20)
 
-	 /*
-	  * Test if the item should be boxed when appearing in an array
-	  * of pointers. Null is a pointer (= nil). Small positive and
-	  * negative number are not pointers
-	  */
-#define IS_POINTER(n) \
-    (((intptr_t) n) >= SMALLEST_POSSIBLE_POINTER || \
-     ((intptr_t) n) <= -SMALLEST_POSSIBLE_POINTER || \
-     ((intptr_t) n) == 0)
-
-	   /*
-		* IS_BOX_POINTER.  Test if the item is a non null pointer
-		*/
+       /*
+	* IS_BOX_POINTER.  Test if the item is a non null pointer
+	*/
 #define IS_BOX_POINTER(n) \
     (((intptr_t) n) >= SMALLEST_POSSIBLE_POINTER || \
      ((intptr_t) n) <= -SMALLEST_POSSIBLE_POINTER)
 
-
-
-#define INTEGERP(x) \
-  (! IS_BOX_POINTER (x) )
-
-
-#define IS_NONLEAF_DTP(dtp) \
-    (((dtp) == BT_ARRAY_OF_POINTER) || \
-     ((dtp) == BT_LIST_OF_POINTER) )
-
+#define IS_NONLEAF_TAG(tag) \
+    (((tag) == BT_ARRAY_OF_POINTER) || \
+     ((tag) == BT_LIST_OF_POINTER) )
 
 #define BT_TYPE_OF(x) \
     (IS_BOX_POINTER (x) \
         ? box_tag(x) \
-        : ((dtp_t)(BT_INT)) )
-
-#define IS_DB_NULL(x) \
-  (IS_BOX_POINTER(x) && box_tag (x) == BT_DB_NULL)
+        : ((tag_t)(BT_INT)) )
 
 #define BT_STRINGP(q) \
   (IS_BOX_POINTER (q) && (BT_STRING == box_tag (q)))
@@ -138,7 +118,7 @@
 		box_t box_long(int64_t val);
 		box_t box_double(double);
 
-		box_t alloc_box(int n, dtp_t tag);
+		box_t alloc_box(int n, tag_t tag);
 		char **list_to_array(s_node_t * set);
 		char **revlist_to_array(s_node_t * set);
 		char **list(long n, ...);

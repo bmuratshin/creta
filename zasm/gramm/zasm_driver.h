@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "box.h"
+#include "../../common/box.h"
 #include "../../common/hwcommon.h"
 
 	typedef void* yyscan_t;

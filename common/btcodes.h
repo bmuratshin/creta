@@ -1,7 +1,6 @@
 #pragma once
 
 enum box_type {
-  BT_FIRST_UNUSED =           32,
   BT_ARRAY_OF_POINTER,
   BT_LIST_OF_POINTER,
   BT_INT,
@@ -10,7 +9,6 @@ enum box_type {
   BT_DOUBLE,
 
   BT_NULL,
-  BT_DB_NULL,
   BT_WIDE,
   BT_NUMERIC,
   BT_DATE,
@@ -25,5 +23,6 @@ enum box_type {
   BT_OBE_LITERAL,
   BT_SHAPE,
   BT_RASTER,
+  BT_FIRST_UNUSED
 };
 

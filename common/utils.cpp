@@ -916,3 +916,19 @@
 		throw (throw_buf);
 	}
 
+void throw_(const char *str)
+{
+	throw str;
+}
+
+
+void *new_smth(size_t size)
+{
+	void *ret = calloc(size, 1);
+	return ret;
+}
+
+void free_smth(void *ptr)
+{
+	free(ptr);
+}

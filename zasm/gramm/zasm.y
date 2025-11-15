@@ -16,7 +16,7 @@
 %{
 
 #include <stdint.h>
-#include "box.h"
+#include "../../common/box.h"
 #include "zasm_driver.h"
 #include "zasm_tree.h"
 

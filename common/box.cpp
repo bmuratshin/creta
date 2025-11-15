@@ -16,7 +16,7 @@ static char THIS_FILE[]=__FILE__;
 	box_t
 		box_mp_t::box_copy(box_t box)
 	{
-		dtp_t tag;
+		tag_t tag;
 		uint32_t len;
 		box_t copy;
 
@@ -35,14 +35,14 @@ static char THIS_FILE[]=__FILE__;
 		box_mp_t::box_copy_tree(box_t box)
 	{
 		box_t *copy;
-		dtp_t tag;
+		tag_t tag;
 
 		if (!IS_BOX_POINTER(box))
 			return box;
 
 		tag = box_tag(box);
 		copy = (box_t *)box_copy(box);
-		if (IS_NONLEAF_DTP(tag))
+		if (IS_NONLEAF_TAG(tag))
 		{
 			uint32_t inx, len = BOX_ELEMENTS(box);
 			for (inx = 0; inx < len; inx++)
@@ -121,7 +121,7 @@ static char THIS_FILE[]=__FILE__;
 	}
 
 	void *
-		box_mp_t::alloc_box(int n, dtp_t tag)
+		box_mp_t::alloc_box(int n, tag_t tag)
 	{
 		unsigned char *ret;
 		assert(n >= 0 && n < 10000000);

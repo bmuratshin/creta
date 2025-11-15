@@ -4,17 +4,17 @@ DATA {
 }
 
 CCODE {
-initial:
+@initial:
         exec block1;
         call factorial 4 0;
 }
 CCODE {
 factorial:
         exec block2;
-        if endif1;
+        if @endif1;
         exec block3;
         ret;
-endif1:
+@endif1:
         exec block4;
         call factorial 4 0;
         exec block5;

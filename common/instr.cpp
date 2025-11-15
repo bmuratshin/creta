@@ -9,27 +9,55 @@
 #include "instr.h"
 
 static instr_def_t sc_instrs[] = {
-	{"stop",     ioCSstop, 0},
-	{"nop",      ioCSnop,  0},
-	{"exec",     ioCSexec, 1, {iatXAddr}},
-	{"call",     ioCScall, 3, {iatCAddr, iatInt, iatInt}},
-	{"if",       ioCSif,   1, {iatCAddr}},
-	{"ret",      ioCSret,  0},
-	{"goto",     ioCSgoto, 1, {iatCAddr}},
+	{"stop",     ioCSstop, 1, 0},
+	{"nop",      ioCSnop,  1, 0},
+	{"exec",     ioCSexec, 1, 1, {iatXAddr}},
+	{"call",     ioCScall, 1, 3, {iatCAddr, iatInt, iatInt}},
+	{"if",       ioCSif,   1, 1, {iatCAddr}},
+	{"ret",      ioCSret,  1, 0},
+	{"goto",     ioCSgoto, 1, 1, {iatCAddr}},
 };
 
 static instr_def_t sx_instrs[] = {
 	{"stop",     ioCXstop},
-	{"imdpush",  ioCXimdpush,  1, {iatInt}},
-	{"locpush",  ioCXlocpush,  1, {iatInt}},
-	{"eval",     ioCXeval,     0},
-	{"cmp",      ioCXcmp,      1, {iatInt}},
-	{"add",      ioCXadd,      0},
-	{"sub",      ioCXsub,      0},
-	{"mul",      ioCXmul,      0},
-	{"div",      ioCXdiv,      0},
-	{"varpush",  ioCXvarpush,  1, {iatDAddr}},
-	{"varpushd", ioCXvarpushd, 1, {iatDAddr}},
+	{"nop",      ioCXnop},
+	{"imdpush",  ioCXimdpush,  0,  1, {iatInt}},
+	{"locpush",  ioCXlocpush,  0,  1, {iatInt}},
+	{"locpushd", ioCXlocpushd, 0,  1, {iatInt}},
+	{"eval",     ioCXeval},
+	{"cmp",      ioCXcmp,      0,  1, {iatInt}},
+	{"add",      ioCXadd},
+	{"neg",      ioCXneg},
+	{"sub",      ioCXsub},
+
+	{"mul",      ioCXmul},
+	{"div",      ioCXdiv},
+	{"varpush",  ioCXvarpush,  0,  1, {iatDAddr}},
+	{"varpushd", ioCXvarpushd, 0, 1, {iatDAddr}},
+	{"eq",       ioCXeq},
+	{"ne",       ioCXne},
+	{"gt",       ioCXgt},
+	{"ge",       ioCXge},
+	{"lt",       ioCXlt},
+	{"le",       ioCXle},
+
+	{"dec",      ioCXdec},
+	{"inc",      ioCXinc},
+	{"postdec",  ioCXpostdec},
+	{"postinc",  ioCXpostinc},
+	{"preand",   ioCXpreand},
+	{"and",      ioCXand},
+	{"preor",    ioCXpreor},
+	{"or",       ioCXor},
+	{"not",      ioCXnot},
+	{"band",     ioCXband},
+
+	{"bor",      ioCXbor},
+	{"xor",      ioCXxor},
+	{"bnot",     ioCXbnot},
+	{"assign",   ioCXassign},
+	{"pop",      ioCXpop},
+
 };
 
 static std::map<std::string, const instr_def_t*> cf_instrs;
@@ -51,6 +79,12 @@ static int init_maps()
 }
 static int inites = init_maps();
 
+const instr_def_t* get_asm_instr(unsigned opix)
+{
+	bool cf = opix & 1;
+	int opcode = opix >> 1;
+	return get_asm_instr(opcode, cf);
+}
 
 
 const instr_def_t* test_asm_name(const char* str, bool cf)
@@ -69,5 +103,29 @@ const instr_def_t* test_asm_name(const char* str, bool cf)
 			return it->second;
 	}
 	return NULL;
+}
+
+
+constexpr const instr_def_t* get_asm_instr(int opcode, bool cf)
+{
+	assert(ioCS_MAX == sizeof(sc_instrs) / sizeof(sc_instrs[0]));
+	assert(ioCX_MAX == sizeof(sx_instrs) / sizeof(sx_instrs[0]));
+
+	if (cf)
+	{
+		assert(sc_instrs[opcode].opcode_ == opcode);
+		if (opcode < ioCS_MAX)
+			return &sc_instrs[opcode];
+		assert(0);
+		return NULL;
+	}
+	else
+	{
+		assert(sx_instrs[opcode].opcode_ == opcode);
+		if (opcode < ioCX_MAX)
+			return &sx_instrs[opcode];
+		assert(0);
+		return NULL;
+	}
 }
 

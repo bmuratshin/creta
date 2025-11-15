@@ -7,14 +7,7 @@
 #include <assert.h>
 
 
-#define lint
-#ifdef _WIN32
-//#include <io.h>
-//#define isatty _isatty
-//#define fileno _fileno
-#endif
-
-#include "box.h"
+#include "../../common/box.h"
 #include "zasm_tree.h"
 #include "../../common/instr.h"
 #undef YY_DECL_IS_OURS

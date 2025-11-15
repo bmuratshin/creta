@@ -12,22 +12,52 @@
 `define FIFO_ITEM_WIDTH (`DECODER_MEM_ADDR_WIDTH+`INSTR_WIDTH)
 
 
-`define ioCSstop  0
-`define ioCSnop   1
-`define ioCSexec  2
-`define ioCScall  3
-`define ioCSif    4
-`define ioCSret   5
-`define ioCSgoto  6
+`define ioCSstop      0
+`define ioCSnop       1
+`define ioCSexec      2
+`define ioCScall      3
+`define ioCSif        4
+`define ioCSret       5
+`define ioCSgoto      6
 
 `define ioCXstop      0
-`define ioCXimdpush   1
-`define ioCXlocpush   2
-`define ioCXeval      3
-`define ioCXcmp       4
-`define ioCXadd       5
-`define ioCXsub       6
-`define ioCXmul       7
-`define ioCXdiv       8
-`define ioCXvarpush   9
-`define ioCXvarpushd  10
+`define ioCXnop       1
+`define ioCXimdpush   2
+`define ioCXlocpush   3
+`define ioCXlocpushd  4
+`define ioCXeval      5
+`define ioCXcmp       6
+`define ioCXadd       7
+`define ioCXneg       8
+`define ioCXsub       9
+
+`define ioCXmul       10
+`define ioCXdiv       11
+`define ioCXvarpush   12
+`define ioCXvarpushd  13
+`define ioCXeq        14
+`define ioCXne        15
+`define ioCXgt        16
+`define ioCXge        17
+`define ioCXlt        18
+`define ioCXle        19
+
+`define ioCXdec       20
+`define ioCXinc       21
+`define ioCXpostdec   22
+`define ioCXpostinc   23
+`define ioCXpreand    24
+`define ioCXand       25
+`define ioCXpreor     26
+`define ioCXor        27
+`define ioCXnot       28
+`define ioCXband      29
+
+`define ioCXbor       30
+`define ioCXxor       31
+`define ioCXbnot      32
+`define ioCXassign    33
+`define ioCXpop       34
+
+
+

@@ -67,7 +67,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t *driver, const char *s);
 <NORM>"CCODE"					{ return(ZASM_CCODE_SECTION); }
 <NORM>"XCODE"					{ return(ZASM_XCODE_SECTION); }
 
-<NORM>[A-Za-z_][A-Za-z0-9_@]** {
+<NORM>[A-Za-z_@][A-Za-z0-9_@]** {
   const instr_def_t *k= NULL;
   char buf[64], *cp, *sp;
   for (cp = buf, sp = yytext; *sp && cp < &buf[63];)
@@ -128,7 +128,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t *driver, const char *s);
   return ZASM_PRAGMA;
 }    /* pragma */
 
-<NORM>"--".*    ;    /* comment */
+<NORM>"//".*    ;    /* comment */
 <NORM>"/\*"    { BEGIN (COMMENT); }
 <COMMENT>"/\*"  { zasmerror (yyscanner, (zasm_driver_t*)user_data, "Nested C style comments not supported"); }
 <COMMENT>"\*/"    { BEGIN (NORM); }

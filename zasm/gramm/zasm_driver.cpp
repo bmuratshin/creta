@@ -6,9 +6,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "utils.h"
-#include "box.h"
-#include "multibyte.h"
+#include "../../common/utils.h"
+#include "../../common/box.h"
+#include "../../common/multibyte.h"
 
 #include "zasm_tree.h"
 #include "zasm_driver.h"
@@ -375,7 +375,12 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 		}
 
 		{
-			std::string fname = cur_file_ + ".map";
+			const char* tmp = strrchr(cur_file_.c_str(), '.');
+			size_t pos = tmp ? tmp - cur_file_.c_str() : cur_file_.length();
+
+			std::string fname = std::string(cur_file_.c_str(), pos);
+			fname += ".map";
+
 			FILE* fl = fopen(fname.c_str(), "w");
 			if (NULL == fl)
 				return -1;
@@ -386,12 +391,24 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 				fprintf(fl, "\t %ls: 0x%llx\n", it.first.c_str(), it.second);
 			}
 
+			fprintf(fl, "\nCCODE:\n");
+			for (const auto it : ccode_bookmarks_)
+			{
+				fprintf(fl, "\t %ls: 0x%llx\n", it.first.c_str(), it.second);
+			}
+
+			fprintf(fl, "\nCCODE:\n");
+			for (const auto it : xcode_bookmarks_)
+			{
+				fprintf(fl, "\t %ls: 0x%llx\n", it.first.c_str(), it.second);
+			}
+
 			fprintf(fl, "\n");
 			fclose(fl);
 		}
 
 		{
-			auto bit = ccode_bookmarks_.find(L"initial");
+			auto bit = ccode_bookmarks_.find(L"@initial");
 			if (bit != ccode_bookmarks_.end())
 				printf("Initial code address: 0x%lx\n", (long)bit->second);
 
