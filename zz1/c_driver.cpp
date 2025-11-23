@@ -48,13 +48,13 @@ int c_driver_t::parse()
 }
 
 char **
-c_driver_t::list(long n, ...)
+c_driver_t::mk_node(long n, ...)
 {
 	char **box;
 	va_list ap;
 	va_start(ap, n);
 
-	box = mp_.list(n, ap);
+	box = mp_.mk_node(n, ap);
 	c_tree_t* ptr = (c_tree_t*)box;
 	ptr->line_ = yyget_lineno(scanner_) + 1;
 
@@ -65,7 +65,7 @@ c_driver_t::list(long n, ...)
 int c_driver_t::gencode()
 {
 	//stmt_ = NEW_SMTH(stmt_t);
-	parse_tree_ = (TT*)mp_.list(2, STMT_LIST, mp_.list_to_array(parse_list_));
+	parse_tree_ = (TT*)mp_.mk_node(2, STMT_LIST, mp_.list_to_array(parse_list_));
 	code_.c_exp_trace(parse_tree_);
 	//stmt_->proc_ = NEW_SMTH_P(qproc_t, (stmt_->code_));
 	return 0;

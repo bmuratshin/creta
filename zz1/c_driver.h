@@ -22,7 +22,7 @@ struct c_driver_t {
 	int parse();
 	int gencode();
 	int outcode();
-	char **list(long n, ...);
+	char **mk_node(long n, ...);
 	//	int run();
 
 	FILE               *fl_;

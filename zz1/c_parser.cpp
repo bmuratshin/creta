@@ -2056,7 +2056,7 @@ yyreduce:
   case 9: /* constant: ENUMERATION_CONSTANT  */
 #line 151 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_LITERAL, driver->mp_.box_long (0)); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_LITERAL, driver->mp_.box_long (0)); 
 	}
 #line 2062 "c_parser.cpp"
     break;
@@ -2064,7 +2064,7 @@ yyreduce:
   case 10: /* some_identifier: IDENTIFIER  */
 #line 158 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_IDENTIFIER, driver->mp_.box_string ((yyvsp[0].strval))); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_IDENTIFIER, driver->mp_.box_string ((yyvsp[0].strval))); 
 	}
 #line 2070 "c_parser.cpp"
     break;
@@ -2072,7 +2072,7 @@ yyreduce:
   case 12: /* string: STRING_LITERAL  */
 #line 169 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_LITERAL, driver->mp_.box_string ((yyvsp[0].strval))); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_LITERAL, driver->mp_.box_string ((yyvsp[0].strval))); 
 	}
 #line 2078 "c_parser.cpp"
     break;
@@ -2096,7 +2096,7 @@ yyreduce:
   case 21: /* postfix_expression: postfix_expression '(' ')'  */
 #line 199 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_CALL, (yyvsp[-2].tree), NULL, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_CALL, (yyvsp[-2].tree), NULL, NULL); 
 	}
 #line 2102 "c_parser.cpp"
     break;
@@ -2104,7 +2104,7 @@ yyreduce:
   case 22: /* postfix_expression: postfix_expression '(' argument_expression_list ')'  */
 #line 203 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_CALL, (yyvsp[-3].tree), driver->mp_.list_to_array ((yyvsp[-1].list)), NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_CALL, (yyvsp[-3].tree), driver->mp_.list_to_array ((yyvsp[-1].list)), NULL); 
 	}
 #line 2110 "c_parser.cpp"
     break;
@@ -2112,7 +2112,7 @@ yyreduce:
   case 25: /* postfix_expression: postfix_expression INC_OP  */
 #line 209 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (2, STMT_SOP_POSTINC, (yyvsp[-1].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (2, STMT_SOP_POSTINC, (yyvsp[-1].tree)); 
 	}
 #line 2118 "c_parser.cpp"
     break;
@@ -2120,7 +2120,7 @@ yyreduce:
   case 26: /* postfix_expression: postfix_expression DEC_OP  */
 #line 213 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (2, STMT_SOP_POSTDEC, (yyvsp[-1].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (2, STMT_SOP_POSTDEC, (yyvsp[-1].tree)); 
 	}
 #line 2126 "c_parser.cpp"
     break;
@@ -2160,7 +2160,7 @@ yyreduce:
   case 32: /* unary_expression: INC_OP unary_expression  */
 #line 240 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (2, STMT_SOP_PREINC, (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (2, STMT_SOP_PREINC, (yyvsp[0].tree)); 
 	}
 #line 2166 "c_parser.cpp"
     break;
@@ -2168,7 +2168,7 @@ yyreduce:
   case 33: /* unary_expression: DEC_OP unary_expression  */
 #line 244 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (2, STMT_SOP_PREDEC, (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (2, STMT_SOP_PREDEC, (yyvsp[0].tree)); 
 	}
 #line 2174 "c_parser.cpp"
     break;
@@ -2216,7 +2216,7 @@ yyreduce:
   case 47: /* multiplicative_expression: multiplicative_expression '*' cast_expression  */
 #line 285 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_TIMES, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_TIMES, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2222 "c_parser.cpp"
     break;
@@ -2224,7 +2224,7 @@ yyreduce:
   case 48: /* multiplicative_expression: multiplicative_expression '/' cast_expression  */
 #line 289 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_DIV, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_DIV, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2230 "c_parser.cpp"
     break;
@@ -2232,7 +2232,7 @@ yyreduce:
   case 49: /* multiplicative_expression: multiplicative_expression '%' cast_expression  */
 #line 293 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_MODULO, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_MODULO, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2238 "c_parser.cpp"
     break;
@@ -2240,7 +2240,7 @@ yyreduce:
   case 51: /* additive_expression: additive_expression '+' multiplicative_expression  */
 #line 301 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_PLUS, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_PLUS, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2246 "c_parser.cpp"
     break;
@@ -2248,7 +2248,7 @@ yyreduce:
   case 52: /* additive_expression: additive_expression '-' multiplicative_expression  */
 #line 305 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_MINUS, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_MINUS, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2254 "c_parser.cpp"
     break;
@@ -2256,7 +2256,7 @@ yyreduce:
   case 54: /* shift_expression: shift_expression LEFT_OP additive_expression  */
 #line 313 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_LSHIFT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_LSHIFT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2262 "c_parser.cpp"
     break;
@@ -2264,7 +2264,7 @@ yyreduce:
   case 55: /* shift_expression: shift_expression RIGHT_OP additive_expression  */
 #line 317 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_RSHIFT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_RSHIFT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2270 "c_parser.cpp"
     break;
@@ -2272,7 +2272,7 @@ yyreduce:
   case 57: /* relational_expression: relational_expression '<' shift_expression  */
 #line 325 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_LT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_LT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2278 "c_parser.cpp"
     break;
@@ -2280,7 +2280,7 @@ yyreduce:
   case 58: /* relational_expression: relational_expression '>' shift_expression  */
 #line 329 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_GT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_GT, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2286 "c_parser.cpp"
     break;
@@ -2288,7 +2288,7 @@ yyreduce:
   case 59: /* relational_expression: relational_expression LE_OP shift_expression  */
 #line 333 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_LTE, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_LTE, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2294 "c_parser.cpp"
     break;
@@ -2296,7 +2296,7 @@ yyreduce:
   case 60: /* relational_expression: relational_expression GE_OP shift_expression  */
 #line 337 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_GTE, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_GTE, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2302 "c_parser.cpp"
     break;
@@ -2304,7 +2304,7 @@ yyreduce:
   case 62: /* equality_expression: equality_expression EQ_OP relational_expression  */
 #line 345 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_EQ, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_EQ, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2310 "c_parser.cpp"
     break;
@@ -2312,7 +2312,7 @@ yyreduce:
   case 63: /* equality_expression: equality_expression NE_OP relational_expression  */
 #line 349 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_NEQ, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_NEQ, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2318 "c_parser.cpp"
     break;
@@ -2320,7 +2320,7 @@ yyreduce:
   case 65: /* and_expression: and_expression '&' equality_expression  */
 #line 357 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_BAND, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_BAND, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2326 "c_parser.cpp"
     break;
@@ -2328,7 +2328,7 @@ yyreduce:
   case 67: /* exclusive_or_expression: exclusive_or_expression '^' and_expression  */
 #line 365 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_BXOR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_BXOR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2334 "c_parser.cpp"
     break;
@@ -2336,7 +2336,7 @@ yyreduce:
   case 69: /* inclusive_or_expression: inclusive_or_expression '|' exclusive_or_expression  */
 #line 373 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_BOR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_BOR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2342 "c_parser.cpp"
     break;
@@ -2344,7 +2344,7 @@ yyreduce:
   case 71: /* logical_and_expression: logical_and_expression AND_OP inclusive_or_expression  */
 #line 381 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_AND, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_AND, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2350 "c_parser.cpp"
     break;
@@ -2352,7 +2352,7 @@ yyreduce:
   case 73: /* logical_or_expression: logical_or_expression OR_OP logical_and_expression  */
 #line 389 "c_gramm.y"
         {
-		(yyval.tree) = (c_tree_t*)driver->list (3, STMT_BOP_OR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (c_tree_t*)driver->mk_node (3, STMT_BOP_OR, (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 2358 "c_parser.cpp"
     break;
@@ -2360,7 +2360,7 @@ yyreduce:
   case 77: /* assignment_expression: unary_expression assignment_operator assignment_expression  */
 #line 402 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_ASSIGN, driver->mp_.list_to_array (driver->mp_.cons_set ((yyvsp[-2].tree), NULL)), (yyvsp[0].tree), (yyvsp[-1].intval)); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_ASSIGN, driver->mp_.list_to_array (driver->mp_.cons_set ((yyvsp[-2].tree), NULL)), (yyvsp[0].tree), (yyvsp[-1].intval)); 
 	}
 #line 2366 "c_parser.cpp"
     break;
@@ -2368,7 +2368,7 @@ yyreduce:
   case 92: /* declaration: declaration_specifiers ';'  */
 #line 432 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_DCL, NULL, driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_DCL, NULL, driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2374 "c_parser.cpp"
     break;
@@ -2376,7 +2376,7 @@ yyreduce:
   case 93: /* declaration: declaration_specifiers init_declarator_list ';'  */
 #line 436 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_DCL, driver->mp_.list_to_array ((yyvsp[-1].list)), driver->mp_.list_to_array ((yyvsp[-2].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_DCL, driver->mp_.list_to_array ((yyvsp[-1].list)), driver->mp_.list_to_array ((yyvsp[-2].list))); 
 	}
 #line 2382 "c_parser.cpp"
     break;
@@ -2394,7 +2394,7 @@ yyreduce:
         {
 		(yyval.list) = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_STOR_CLASS, (yyvsp[-1].intval)), 
+				(TT*)driver->mk_node (2, STMT_STOR_CLASS, (yyvsp[-1].intval)), 
 				NULL),
 			driver->mp_.cons_set ((yyvsp[0].list), NULL)); 
 	}
@@ -2405,7 +2405,7 @@ yyreduce:
 #line 455 "c_gramm.y"
         {
 		(yyval.list) = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_STOR_CLASS, (yyvsp[0].intval)), 
+			(TT*)driver->mk_node (2, STMT_STOR_CLASS, (yyvsp[0].intval)), 
 			NULL); 
 	}
 #line 2412 "c_parser.cpp"
@@ -2434,7 +2434,7 @@ yyreduce:
         {
 		(yyval.list) = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_TYPE_QUAL, (yyvsp[-1].intval)),
+				(TT*)driver->mk_node (2, STMT_TYPE_QUAL, (yyvsp[-1].intval)),
 				NULL),
 			driver->mp_.cons_set ((yyvsp[0].list), NULL)); 
 	}
@@ -2445,7 +2445,7 @@ yyreduce:
 #line 479 "c_gramm.y"
         {
 		(yyval.list) = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_TYPE_QUAL, (yyvsp[0].intval)), 
+			(TT*)driver->mk_node (2, STMT_TYPE_QUAL, (yyvsp[0].intval)), 
 			NULL); 
 	}
 #line 2452 "c_parser.cpp"
@@ -2456,7 +2456,7 @@ yyreduce:
         {
 		(yyval.list) = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_FUNC_SPEC, (yyvsp[-1].intval)),
+				(TT*)driver->mk_node (2, STMT_FUNC_SPEC, (yyvsp[-1].intval)),
 				NULL),
 			driver->mp_.cons_set ((yyvsp[0].list), NULL)); 
 	}
@@ -2467,7 +2467,7 @@ yyreduce:
 #line 493 "c_gramm.y"
         {
 		(yyval.list) = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_FUNC_SPEC, (yyvsp[0].intval)), 
+			(TT*)driver->mk_node (2, STMT_FUNC_SPEC, (yyvsp[0].intval)), 
 			NULL); 
 	}
 #line 2474 "c_parser.cpp"
@@ -2510,7 +2510,7 @@ yyreduce:
   case 115: /* type_specifier: VOID  */
 #line 537 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, VOID, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, VOID, NULL); 
 	}
 #line 2516 "c_parser.cpp"
     break;
@@ -2518,7 +2518,7 @@ yyreduce:
   case 116: /* type_specifier: CHAR  */
 #line 541 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, CHAR, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, CHAR, NULL); 
 	}
 #line 2524 "c_parser.cpp"
     break;
@@ -2526,7 +2526,7 @@ yyreduce:
   case 117: /* type_specifier: SHORT  */
 #line 545 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, SHORT, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, SHORT, NULL); 
 	}
 #line 2532 "c_parser.cpp"
     break;
@@ -2534,7 +2534,7 @@ yyreduce:
   case 118: /* type_specifier: INT  */
 #line 549 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, INT, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, INT, NULL); 
 	}
 #line 2540 "c_parser.cpp"
     break;
@@ -2542,7 +2542,7 @@ yyreduce:
   case 119: /* type_specifier: LONG  */
 #line 553 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, LONG, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, LONG, NULL); 
 	}
 #line 2548 "c_parser.cpp"
     break;
@@ -2550,7 +2550,7 @@ yyreduce:
   case 120: /* type_specifier: FLOAT  */
 #line 557 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, FLOAT, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, FLOAT, NULL); 
 	}
 #line 2556 "c_parser.cpp"
     break;
@@ -2558,7 +2558,7 @@ yyreduce:
   case 121: /* type_specifier: DOUBLE  */
 #line 561 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, DOUBLE, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, DOUBLE, NULL); 
 	}
 #line 2564 "c_parser.cpp"
     break;
@@ -2566,7 +2566,7 @@ yyreduce:
   case 122: /* type_specifier: SIGNED  */
 #line 565 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, SIGNED, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, SIGNED, NULL); 
 	}
 #line 2572 "c_parser.cpp"
     break;
@@ -2574,7 +2574,7 @@ yyreduce:
   case 123: /* type_specifier: UNSIGNED  */
 #line 569 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, UNSIGNED, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, UNSIGNED, NULL); 
 	}
 #line 2580 "c_parser.cpp"
     break;
@@ -2582,7 +2582,7 @@ yyreduce:
   case 124: /* type_specifier: BOOL  */
 #line 573 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, BOOL, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, BOOL, NULL); 
 	}
 #line 2588 "c_parser.cpp"
     break;
@@ -2590,7 +2590,7 @@ yyreduce:
   case 125: /* type_specifier: COMPLEX  */
 #line 577 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, COMPLEX, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, COMPLEX, NULL); 
 	}
 #line 2596 "c_parser.cpp"
     break;
@@ -2598,7 +2598,7 @@ yyreduce:
   case 126: /* type_specifier: IMAGINARY  */
 #line 581 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, IMAGINARY, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, IMAGINARY, NULL); 
 	}
 #line 2604 "c_parser.cpp"
     break;
@@ -2606,7 +2606,7 @@ yyreduce:
   case 127: /* type_specifier: atomic_type_specifier  */
 #line 585 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
 	}
 #line 2612 "c_parser.cpp"
     break;
@@ -2614,7 +2614,7 @@ yyreduce:
   case 128: /* type_specifier: struct_or_union_specifier  */
 #line 589 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
 	}
 #line 2620 "c_parser.cpp"
     break;
@@ -2622,7 +2622,7 @@ yyreduce:
   case 129: /* type_specifier: enum_specifier  */
 #line 593 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, (yyvsp[0].tree)); 
 	}
 #line 2628 "c_parser.cpp"
     break;
@@ -2630,7 +2630,7 @@ yyreduce:
   case 130: /* type_specifier: TYPEDEF_NAME  */
 #line 597 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, (yyvsp[0].intval)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, (yyvsp[0].intval)); 
 	}
 #line 2636 "c_parser.cpp"
     break;
@@ -2638,7 +2638,7 @@ yyreduce:
   case 131: /* struct_or_union_specifier: struct_or_union '{' struct_declaration_list '}'  */
 #line 604 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_STRUCT_DEF, NULL, (yyvsp[-3].intval), driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_STRUCT_DEF, NULL, (yyvsp[-3].intval), driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2644 "c_parser.cpp"
     break;
@@ -2646,7 +2646,7 @@ yyreduce:
   case 132: /* struct_or_union_specifier: struct_or_union IDENTIFIER '{' struct_declaration_list '}'  */
 #line 608 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_STRUCT_DEF, (yyvsp[-3].strval), (yyvsp[-4].intval), driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_STRUCT_DEF, (yyvsp[-3].strval), (yyvsp[-4].intval), driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2652 "c_parser.cpp"
     break;
@@ -2654,7 +2654,7 @@ yyreduce:
   case 133: /* struct_or_union_specifier: struct_or_union IDENTIFIER  */
 #line 612 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_SC_VARDEF, (yyvsp[0].strval), (yyvsp[-1].intval)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_SC_VARDEF, (yyvsp[0].strval), (yyvsp[-1].intval)); 
 	}
 #line 2660 "c_parser.cpp"
     break;
@@ -2766,7 +2766,7 @@ yyreduce:
   case 166: /* alignment_specifier: ALIGNAS '(' type_name ')'  */
 #line 726 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_ALIGN_SPEC, NULL, (yyvsp[-1].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_ALIGN_SPEC, NULL, (yyvsp[-1].tree)); 
 	}
 #line 2772 "c_parser.cpp"
     break;
@@ -2774,7 +2774,7 @@ yyreduce:
   case 167: /* alignment_specifier: ALIGNAS '(' constant_expression ')'  */
 #line 730 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_ALIGN_SPEC, NULL, (yyvsp[-1].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_ALIGN_SPEC, NULL, (yyvsp[-1].tree)); 
 	}
 #line 2780 "c_parser.cpp"
     break;
@@ -2798,7 +2798,7 @@ yyreduce:
   case 181: /* direct_declarator: direct_declarator '(' parameter_type_list ')'  */
 #line 759 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_PROC_HEAD, (yyvsp[-3].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_PROC_HEAD, (yyvsp[-3].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2804 "c_parser.cpp"
     break;
@@ -2830,7 +2830,7 @@ yyreduce:
   case 194: /* parameter_declaration: declaration_specifiers declarator  */
 #line 799 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_PARAM_DEF, (yyvsp[0].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_PARAM_DEF, (yyvsp[0].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2836 "c_parser.cpp"
     break;
@@ -2838,7 +2838,7 @@ yyreduce:
   case 195: /* parameter_declaration: declaration_specifiers abstract_declarator  */
 #line 803 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_PARAM_DEF, (yyvsp[0].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_PARAM_DEF, (yyvsp[0].tree), driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2844 "c_parser.cpp"
     break;
@@ -2846,7 +2846,7 @@ yyreduce:
   case 196: /* parameter_declaration: declaration_specifiers  */
 #line 807 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (3, STMT_PARAM_DEF, NULL, driver->mp_.list_to_array ((yyvsp[0].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (3, STMT_PARAM_DEF, NULL, driver->mp_.list_to_array ((yyvsp[0].list))); 
 	}
 #line 2852 "c_parser.cpp"
     break;
@@ -2894,7 +2894,7 @@ yyreduce:
   case 248: /* compound_statement: '{' block_item_list '}'  */
 #line 916 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_LIST, driver->mp_.list_to_array ((yyvsp[-1].list))); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_LIST, driver->mp_.list_to_array ((yyvsp[-1].list))); 
 	}
 #line 2900 "c_parser.cpp"
     break;
@@ -2926,7 +2926,7 @@ yyreduce:
   case 254: /* expression_statement: expression ';'  */
 #line 943 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_STMT, (yyvsp[-1].tree));
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_STMT, (yyvsp[-1].tree));
 	}
 #line 2932 "c_parser.cpp"
     break;
@@ -2934,7 +2934,7 @@ yyreduce:
   case 255: /* selection_statement: IF '(' expression ')' statement ELSE statement  */
 #line 950 "c_gramm.y"
         {
-      (yyval.tree) = (TT*)driver->list (
+      (yyval.tree) = (TT*)driver->mk_node (
 		4, STMT_IF, (yyvsp[-4].tree), (yyvsp[-2].tree), (yyvsp[0].tree));
 	}
 #line 2941 "c_parser.cpp"
@@ -2943,7 +2943,7 @@ yyreduce:
   case 256: /* selection_statement: IF '(' expression ')' statement  */
 #line 955 "c_gramm.y"
         {
-      (yyval.tree) = (TT*)driver->list (
+      (yyval.tree) = (TT*)driver->mk_node (
 		4, STMT_IF, (yyvsp[-2].tree), (yyvsp[0].tree), NULL);
 	}
 #line 2950 "c_parser.cpp"
@@ -2976,7 +2976,7 @@ yyreduce:
   case 267: /* jump_statement: RETURN ';'  */
 #line 985 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_RETURN, NULL); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_RETURN, NULL); 
 	}
 #line 2982 "c_parser.cpp"
     break;
@@ -2984,7 +2984,7 @@ yyreduce:
   case 268: /* jump_statement: RETURN expression ';'  */
 #line 989 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (2, STMT_RETURN, (yyvsp[-1].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (2, STMT_RETURN, (yyvsp[-1].tree)); 
 	}
 #line 2990 "c_parser.cpp"
     break;
@@ -3010,7 +3010,7 @@ yyreduce:
   case 273: /* function_definition: declaration_specifiers declarator declaration_list compound_statement  */
 #line 1014 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_PROC_DEF, driver->mp_.list_to_array ((yyvsp[-3].list)), (yyvsp[-2].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_PROC_DEF, driver->mp_.list_to_array ((yyvsp[-3].list)), (yyvsp[-2].tree), (yyvsp[0].tree)); 
 	}
 #line 3016 "c_parser.cpp"
     break;
@@ -3018,7 +3018,7 @@ yyreduce:
   case 274: /* function_definition: declaration_specifiers declarator compound_statement  */
 #line 1018 "c_gramm.y"
         {
-		(yyval.tree) = (TT*)driver->list (4, STMT_PROC_DEF, driver->mp_.list_to_array ((yyvsp[-2].list)), (yyvsp[-1].tree), (yyvsp[0].tree)); 
+		(yyval.tree) = (TT*)driver->mk_node (4, STMT_PROC_DEF, driver->mp_.list_to_array ((yyvsp[-2].list)), (yyvsp[-1].tree), (yyvsp[0].tree)); 
 	}
 #line 3024 "c_parser.cpp"
     break;

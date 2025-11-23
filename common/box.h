@@ -121,8 +121,8 @@
 		box_t alloc_box(int n, tag_t tag);
 		char **list_to_array(s_node_t * set);
 		char **revlist_to_array(s_node_t * set);
-		char **list(long n, ...);
-		char **list(long n, va_list &ap);
+		char **mk_node(long n, ...);
+		char **mk_node(long n, va_list &ap);
 		box_t box_num(intptr_t n);
 		static uint32_t box_set_length(s_node_t *set);
 		static void revert(box_set_t &set);

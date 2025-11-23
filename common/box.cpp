@@ -132,7 +132,7 @@ static char THIS_FILE[]=__FILE__;
 
 #if 1
 	char **
-		box_mp_t::list(long n, va_list& ap)
+		box_mp_t::mk_node(long n, va_list& ap)
 	{
 		char ** box;
 		int inx;
@@ -146,18 +146,18 @@ static char THIS_FILE[]=__FILE__;
 	}
 
 	char **
-		box_mp_t::list(long n, ...)
+		box_mp_t::mk_node(long n, ...)
 	{
 		char ** box;
 		va_list ap;
 		va_start(ap, n);
-		box = list(n, ap);
+		box = mk_node(n, ap);
 		va_end(ap);
 		return ((char **)box);
 	}
 #else
 	caddr_t *
-		box_mp_t::list(long n, ...)
+		box_mp_t::mk_node(long n, ...)
 	{
 		caddr_t *box;
 		va_list ap;

@@ -78,7 +78,7 @@ extern void zasmerror(yyscan_t yyscanner, zasm_driver_t* driver, const char* s);
 		va_list ap;
 		va_start(ap, n);
 
-		box = mp_.list(n, ap);
+		box = mp_.mk_node(n, ap);
 		zasm_tree_t* ptr = (zasm_tree_t*)box;
 		ptr->line_ = zasmget_lineno(scanner_) + 1;
 

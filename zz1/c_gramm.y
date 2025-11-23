@@ -149,14 +149,14 @@ constant
 	}
 	| ENUMERATION_CONSTANT	/* after it has been defined as such */
 	{
-		$$ = (TT*)driver->list (2, STMT_LITERAL, driver->mp_.box_long (0)); 
+		$$ = (TT*)driver->mk_node (2, STMT_LITERAL, driver->mp_.box_long (0)); 
 	}
 	;
 
 some_identifier
 	: IDENTIFIER
 	{
-		$$ = (TT*)driver->list (2, STMT_IDENTIFIER, driver->mp_.box_string ($1)); 
+		$$ = (TT*)driver->mk_node (2, STMT_IDENTIFIER, driver->mp_.box_string ($1)); 
 	}
 	;
 
@@ -167,7 +167,7 @@ enumeration_constant		/* before it has been defined as such */
 string
 	: STRING_LITERAL
 	{
-		$$ = (TT*)driver->list (2, STMT_LITERAL, driver->mp_.box_string ($1)); 
+		$$ = (TT*)driver->mk_node (2, STMT_LITERAL, driver->mp_.box_string ($1)); 
 	}
 	| FUNC_NAME
 	{
@@ -197,21 +197,21 @@ postfix_expression
 	| postfix_expression '[' expression ']'
 	| postfix_expression '(' ')'
 	{
-		$$ = (TT*)driver->list (4, STMT_CALL, $1, NULL, NULL); 
+		$$ = (TT*)driver->mk_node (4, STMT_CALL, $1, NULL, NULL); 
 	}
 	| postfix_expression '(' argument_expression_list ')'
 	{
-		$$ = (TT*)driver->list (4, STMT_CALL, $1, driver->mp_.list_to_array ($3), NULL); 
+		$$ = (TT*)driver->mk_node (4, STMT_CALL, $1, driver->mp_.list_to_array ($3), NULL); 
 	}
 	| postfix_expression '.' IDENTIFIER
 	| postfix_expression PTR_OP IDENTIFIER
 	| postfix_expression INC_OP
 	{
-		$$ = (c_tree_t*)driver->list (2, STMT_SOP_POSTINC, $1); 
+		$$ = (c_tree_t*)driver->mk_node (2, STMT_SOP_POSTINC, $1); 
 	}
 	| postfix_expression DEC_OP
 	{
-		$$ = (c_tree_t*)driver->list (2, STMT_SOP_POSTDEC, $1); 
+		$$ = (c_tree_t*)driver->mk_node (2, STMT_SOP_POSTDEC, $1); 
 	}
 	| '(' type_name ')' '{' initializer_list '}'
 	{
@@ -238,11 +238,11 @@ unary_expression
 	: postfix_expression
 	| INC_OP unary_expression
 	{
-		$$ = (c_tree_t*)driver->list (2, STMT_SOP_PREINC, $2); 
+		$$ = (c_tree_t*)driver->mk_node (2, STMT_SOP_PREINC, $2); 
 	}
 	| DEC_OP unary_expression
 	{
-		$$ = (c_tree_t*)driver->list (2, STMT_SOP_PREDEC, $2); 
+		$$ = (c_tree_t*)driver->mk_node (2, STMT_SOP_PREDEC, $2); 
 	}
 	| unary_operator cast_expression
 	{
@@ -283,15 +283,15 @@ multiplicative_expression
 	: cast_expression
 	| multiplicative_expression '*' cast_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_TIMES, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_TIMES, $1, $3); 
 	}
 	| multiplicative_expression '/' cast_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_DIV, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_DIV, $1, $3); 
 	}
 	| multiplicative_expression '%' cast_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_MODULO, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_MODULO, $1, $3); 
 	}
 	;
 
@@ -299,11 +299,11 @@ additive_expression
 	: multiplicative_expression
 	| additive_expression '+' multiplicative_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_PLUS, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_PLUS, $1, $3); 
 	}
 	| additive_expression '-' multiplicative_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_MINUS, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_MINUS, $1, $3); 
 	}
 	;
 
@@ -311,11 +311,11 @@ shift_expression
 	: additive_expression
 	| shift_expression LEFT_OP additive_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_LSHIFT, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_LSHIFT, $1, $3); 
 	}
 	| shift_expression RIGHT_OP additive_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_RSHIFT, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_RSHIFT, $1, $3); 
 	}
 	;
 
@@ -323,19 +323,19 @@ relational_expression
 	: shift_expression
 	| relational_expression '<' shift_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_LT, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_LT, $1, $3); 
 	}
 	| relational_expression '>' shift_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_GT, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_GT, $1, $3); 
 	}
 	| relational_expression LE_OP shift_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_LTE, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_LTE, $1, $3); 
 	}
 	| relational_expression GE_OP shift_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_GTE, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_GTE, $1, $3); 
 	}
 	;
 
@@ -343,11 +343,11 @@ equality_expression
 	: relational_expression
 	| equality_expression EQ_OP relational_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_EQ, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_EQ, $1, $3); 
 	}
 	| equality_expression NE_OP relational_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_NEQ, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_NEQ, $1, $3); 
 	}
 	;
 
@@ -355,7 +355,7 @@ and_expression
 	: equality_expression
 	| and_expression '&' equality_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_BAND, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_BAND, $1, $3); 
 	}
 	;
 
@@ -363,7 +363,7 @@ exclusive_or_expression
 	: and_expression
 	| exclusive_or_expression '^' and_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_BXOR, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_BXOR, $1, $3); 
 	}
 	;
 
@@ -371,7 +371,7 @@ inclusive_or_expression
 	: exclusive_or_expression
 	| inclusive_or_expression '|' exclusive_or_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_BOR, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_BOR, $1, $3); 
 	}
 	;
 
@@ -379,7 +379,7 @@ logical_and_expression
 	: inclusive_or_expression
 	| logical_and_expression AND_OP inclusive_or_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_AND, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_AND, $1, $3); 
 	}
 	;
 
@@ -387,7 +387,7 @@ logical_or_expression
 	: logical_and_expression
 	| logical_or_expression OR_OP logical_and_expression
 	{
-		$$ = (c_tree_t*)driver->list (3, STMT_BOP_OR, $1, $3); 
+		$$ = (c_tree_t*)driver->mk_node (3, STMT_BOP_OR, $1, $3); 
 	}
 	;
 
@@ -400,7 +400,7 @@ assignment_expression
 	: conditional_expression
 	| unary_expression assignment_operator assignment_expression
 	{
-		$$ = (TT*)driver->list (4, STMT_ASSIGN, driver->mp_.list_to_array (driver->mp_.cons_set ($1, NULL)), $3, $2); 
+		$$ = (TT*)driver->mk_node (4, STMT_ASSIGN, driver->mp_.list_to_array (driver->mp_.cons_set ($1, NULL)), $3, $2); 
 	}
 	;
 
@@ -430,11 +430,11 @@ constant_expression
 declaration
 	: declaration_specifiers ';'
 	{
-		$$ = (TT*)driver->list (3, STMT_DCL, NULL, driver->mp_.list_to_array ($1)); 
+		$$ = (TT*)driver->mk_node (3, STMT_DCL, NULL, driver->mp_.list_to_array ($1)); 
 	}
 	| declaration_specifiers init_declarator_list ';'
 	{
-		$$ = (TT*)driver->list (3, STMT_DCL, driver->mp_.list_to_array ($2), driver->mp_.list_to_array ($1)); 
+		$$ = (TT*)driver->mk_node (3, STMT_DCL, driver->mp_.list_to_array ($2), driver->mp_.list_to_array ($1)); 
 	}
 	| static_assert_declaration
 	{
@@ -447,14 +447,14 @@ declaration_specifiers
 	{
 		$$ = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_STOR_CLASS, $1), 
+				(TT*)driver->mk_node (2, STMT_STOR_CLASS, $1), 
 				NULL),
 			driver->mp_.cons_set ($2, NULL)); 
 	}
 	| storage_class_specifier
 	{
 		$$ = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_STOR_CLASS, $1), 
+			(TT*)driver->mk_node (2, STMT_STOR_CLASS, $1), 
 			NULL); 
 	}
 	| type_specifier declaration_specifiers
@@ -471,28 +471,28 @@ declaration_specifiers
 	{
 		$$ = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_TYPE_QUAL, $1),
+				(TT*)driver->mk_node (2, STMT_TYPE_QUAL, $1),
 				NULL),
 			driver->mp_.cons_set ($2, NULL)); 
 	}
 	| type_qualifier
 	{
 		$$ = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_TYPE_QUAL, $1), 
+			(TT*)driver->mk_node (2, STMT_TYPE_QUAL, $1), 
 			NULL); 
 	}
 	| function_specifier declaration_specifiers
 	{
 		$$ = driver->mp_.box_set_conc (
 			driver->mp_.cons_set (
-				(TT*)driver->list (2, STMT_FUNC_SPEC, $1),
+				(TT*)driver->mk_node (2, STMT_FUNC_SPEC, $1),
 				NULL),
 			driver->mp_.cons_set ($2, NULL)); 
 	}
 	| function_specifier
 	{
 		$$ = driver->mp_.cons_set (
-			(TT*)driver->list (2, STMT_FUNC_SPEC, $1), 
+			(TT*)driver->mk_node (2, STMT_FUNC_SPEC, $1), 
 			NULL); 
 	}
 	| alignment_specifier declaration_specifiers
@@ -535,82 +535,82 @@ storage_class_specifier
 type_specifier
 	: VOID
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, VOID, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, VOID, NULL); 
 	}
 	| CHAR
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, CHAR, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, CHAR, NULL); 
 	}
 	| SHORT
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, SHORT, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, SHORT, NULL); 
 	}
 	| INT
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, INT, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, INT, NULL); 
 	}
 	| LONG
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, LONG, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, LONG, NULL); 
 	}
 	| FLOAT
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, FLOAT, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, FLOAT, NULL); 
 	}
 	| DOUBLE
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, DOUBLE, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, DOUBLE, NULL); 
 	}
 	| SIGNED
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, SIGNED, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, SIGNED, NULL); 
 	}
 	| UNSIGNED
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, UNSIGNED, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, UNSIGNED, NULL); 
 	}
 	| BOOL
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, BOOL, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, BOOL, NULL); 
 	}
 	| COMPLEX
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, COMPLEX, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, COMPLEX, NULL); 
 	}
 	| IMAGINARY	  	/* non-mandated extension */
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, IMAGINARY, NULL); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, IMAGINARY, NULL); 
 	}
 	| atomic_type_specifier
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, $1); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, $1); 
 	}
 	| struct_or_union_specifier
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, $1); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, $1); 
 	}
 	| enum_specifier
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, $1); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, $1); 
 	}
 	| TYPEDEF_NAME		/* after it has been defined as such */
 	{
-		$$ = (TT*)driver->list (3, STMT_TYPE_SPEC, 0, $1); 
+		$$ = (TT*)driver->mk_node (3, STMT_TYPE_SPEC, 0, $1); 
 	}
 	;
 
 struct_or_union_specifier
 	: struct_or_union '{' struct_declaration_list '}'
 	{
-		$$ = (TT*)driver->list (4, STMT_STRUCT_DEF, NULL, $1, driver->mp_.list_to_array ($3)); 
+		$$ = (TT*)driver->mk_node (4, STMT_STRUCT_DEF, NULL, $1, driver->mp_.list_to_array ($3)); 
 	}
 	| struct_or_union IDENTIFIER '{' struct_declaration_list '}'
 	{
-		$$ = (TT*)driver->list (4, STMT_STRUCT_DEF, $2, $1, driver->mp_.list_to_array ($4)); 
+		$$ = (TT*)driver->mk_node (4, STMT_STRUCT_DEF, $2, $1, driver->mp_.list_to_array ($4)); 
 	}
 	| struct_or_union IDENTIFIER
 	{
-		$$ = (TT*)driver->list (3, STMT_SC_VARDEF, $2, $1); 
+		$$ = (TT*)driver->mk_node (3, STMT_SC_VARDEF, $2, $1); 
 	}
 	;
 
@@ -724,11 +724,11 @@ function_specifier
 alignment_specifier
 	: ALIGNAS '(' type_name ')'
 	{
-		$$ = (TT*)driver->list (3, STMT_ALIGN_SPEC, NULL, $3); 
+		$$ = (TT*)driver->mk_node (3, STMT_ALIGN_SPEC, NULL, $3); 
 	}
 	| ALIGNAS '(' constant_expression ')'
 	{
-		$$ = (TT*)driver->list (3, STMT_ALIGN_SPEC, NULL, $3); 
+		$$ = (TT*)driver->mk_node (3, STMT_ALIGN_SPEC, NULL, $3); 
 	}
 	;
 
@@ -757,7 +757,7 @@ direct_declarator
 	| direct_declarator '[' assignment_expression ']'
 	| direct_declarator '(' parameter_type_list ')'
 	{
-		$$ = (TT*)driver->list (3, STMT_PROC_HEAD, $1, driver->mp_.list_to_array ($3)); 
+		$$ = (TT*)driver->mk_node (3, STMT_PROC_HEAD, $1, driver->mp_.list_to_array ($3)); 
 	}
 	| direct_declarator '(' ')'
 	| direct_declarator '(' identifier_list ')'
@@ -797,15 +797,15 @@ parameter_list
 parameter_declaration
 	: declaration_specifiers declarator
 	{
-		$$ = (TT*)driver->list (3, STMT_PARAM_DEF, $2, driver->mp_.list_to_array ($1)); 
+		$$ = (TT*)driver->mk_node (3, STMT_PARAM_DEF, $2, driver->mp_.list_to_array ($1)); 
 	}
 	| declaration_specifiers abstract_declarator
 	{
-		$$ = (TT*)driver->list (3, STMT_PARAM_DEF, $2, driver->mp_.list_to_array ($1)); 
+		$$ = (TT*)driver->mk_node (3, STMT_PARAM_DEF, $2, driver->mp_.list_to_array ($1)); 
 	}
 	| declaration_specifiers
 	{
-		$$ = (TT*)driver->list (3, STMT_PARAM_DEF, NULL, driver->mp_.list_to_array ($1)); 
+		$$ = (TT*)driver->mk_node (3, STMT_PARAM_DEF, NULL, driver->mp_.list_to_array ($1)); 
 	}
 	;
 
@@ -914,7 +914,7 @@ compound_statement
 	}
 	| '{'  block_item_list '}'
 	{
-		$$ = (TT*)driver->list (2, STMT_LIST, driver->mp_.list_to_array ($2)); 
+		$$ = (TT*)driver->mk_node (2, STMT_LIST, driver->mp_.list_to_array ($2)); 
 	}
 	;
 
@@ -941,19 +941,19 @@ expression_statement
 	}
 	| expression ';'
 	{
-		$$ = (TT*)driver->list (2, STMT_STMT, $1);
+		$$ = (TT*)driver->mk_node (2, STMT_STMT, $1);
 	}
 	;
 
 selection_statement
 	: IF '(' expression ')' statement ELSE statement
 	{
-      $$ = (TT*)driver->list (
+      $$ = (TT*)driver->mk_node (
 		4, STMT_IF, $3, $5, $7);
 	}
 	| IF '(' expression ')' statement
 	{
-      $$ = (TT*)driver->list (
+      $$ = (TT*)driver->mk_node (
 		4, STMT_IF, $3, $5, NULL);
 	}
 	| SWITCH '(' expression ')' statement
@@ -983,11 +983,11 @@ jump_statement
 	}
 	| RETURN ';'
 	{
-		$$ = (TT*)driver->list (2, STMT_RETURN, NULL); 
+		$$ = (TT*)driver->mk_node (2, STMT_RETURN, NULL); 
 	}
 	| RETURN expression ';'
 	{
-		$$ = (TT*)driver->list (2, STMT_RETURN, $2); 
+		$$ = (TT*)driver->mk_node (2, STMT_RETURN, $2); 
 	}
 	;
 
@@ -1012,11 +1012,11 @@ external_declaration
 function_definition
 	: declaration_specifiers declarator declaration_list compound_statement
 	{
-		$$ = (TT*)driver->list (4, STMT_PROC_DEF, driver->mp_.list_to_array ($1), $2, $4); 
+		$$ = (TT*)driver->mk_node (4, STMT_PROC_DEF, driver->mp_.list_to_array ($1), $2, $4); 
 	}
 	| declaration_specifiers declarator compound_statement
 	{
-		$$ = (TT*)driver->list (4, STMT_PROC_DEF, driver->mp_.list_to_array ($1), $2, $3); 
+		$$ = (TT*)driver->mk_node (4, STMT_PROC_DEF, driver->mp_.list_to_array ($1), $2, $3); 
 	}
 	;
 

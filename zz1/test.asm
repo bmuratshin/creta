@@ -12,12 +12,12 @@ a:
     if @endif_2 ;
 @thencode_2:
     exec @blk_4 ;
-    call a 8 4 ;
+    call a 8 0 ;
     ret ;
 @endif_2:
     exec @blk_5 ;
-    call a 8 4 ;
-    call a 8 4 ;
+    call a 8 0 ;
+    call a 8 0 ;
     ret ;
 }
 
@@ -30,8 +30,6 @@ XCODE {
 @blk_2:
     locpushd 4 ;
     imdpush 1 ;
-    add ;
-    locpushd 8 ;
     add ;
 @blk_3:
     locpushd 4 ;
@@ -57,12 +55,18 @@ XCODE {
 CCODE {
 main:
     exec @blk_6 ;
+    call a 8 0 ;
+    exec @blk_7 ;
     ret ;
 }
 
 
 XCODE {
 @blk_6:
+    imdpush 3 ;
+    imdpush 10 ;
+@blk_7:
+    pop ;
     imdpush 0 ;
 }
 

@@ -54,7 +54,7 @@ enum c_tree_type {
 #define TT		c_tree_t
 struct c_tree_t {
 	c_tree_type type_;
-	uint32_t    line_;// Achtung! LittleEndian required! (c_driver_t::list)
+	uint32_t    line_;// Achtung! LittleEndian required! (c_driver_t::mk_node)
 	union
 	{
 		struct

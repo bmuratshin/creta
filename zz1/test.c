@@ -35,14 +35,9 @@
 //https://ru.wikipedia.org/wiki/%D0%A4%D1%83%D0%BD%D0%BA%D1%86%D0%B8%D1%8F_%D0%90%D0%BA%D0%BA%D0%B5%D1%80%D0%BC%D0%B0%D0%BD%D0%B0
 int a(int m, int n)
 {
-  int tmp;
-//  double cc = 12.5;
-//  print(m);
-//  print(n);
-//  cnt++;
   if (m == 0)
     {
-	return n + 1 + tmp;
+	return n + 1;
     }
   if (n == 0)
     {
@@ -53,8 +48,7 @@ int a(int m, int n)
 
 int main()
 {
-  int r =
-    (a(3, 10));//3,10));
+  a(3, 10);//3,10));
   return 0;
 }
 

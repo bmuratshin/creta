@@ -1,57 +1,72 @@
-DATA {
-        a: 0x0001;
-        b: 0x0002;
-}
+// Proc: a
 
 CCODE {
-@initial:
-        exec block1;
-        call factorial 4 0;
+a:
+    exec @blk_1 ;
+    if @endif_1 ;
+@thencode_1:
+    exec @blk_2 ;
+    ret ;
+@endif_1:
+    exec @blk_3 ;
+    if @endif_2 ;
+@thencode_2:
+    exec @blk_4 ;
+    call a 8 0 ;
+    ret ;
+@endif_2:
+    exec @blk_5 ;
+    call a 8 0 ;
+    call a 8 0 ;
+    ret ;
 }
-CCODE {
-factorial:
-        exec block2;
-        if @endif1;
-        exec block3;
-        ret;
-@endif1:
-        exec block4;
-        call factorial 4 0;
-        exec block5;
-        ret;
-}
+
 
 XCODE {
-block1:
-        imdpush 6;
-        stop;
-
-block2:
-        imdpush 1;
-        locpush 0;
-        eval;
-        cmp 2;
-        stop;
-
-block3:
-        imdpush 1;
-        stop;
-
-block4:
-        locpush 0;
-        eval;
-        imdpush 1;
-        sub;
-        stop;
-
-block5:
-        locpush 0;
-        eval;
-        mul;
-        stop;
+@blk_1:
+    locpushd 0 ;
+    imdpush 0 ;
+    eq ;
+@blk_2:
+    locpushd 4 ;
+    imdpush 1 ;
+    add ;
+@blk_3:
+    locpushd 4 ;
+    imdpush 0 ;
+    eq ;
+@blk_4:
+    locpushd 0 ;
+    imdpush 1 ;
+    sub ;
+    imdpush 1 ;
+@blk_5:
+    locpushd 0 ;
+    imdpush 1 ;
+    sub ;
+    locpushd 0 ;
+    locpushd 4 ;
+    imdpush 1 ;
+    sub ;
 }
 
-DATA {
-        c: 0x0003;
-        d: 0x0004;
+// Proc: main
+
+CCODE {
+main:
+    exec @blk_6 ;
+    call a 8 0 ;
+    exec @blk_7 ;
+    ret ;
 }
+
+
+XCODE {
+@blk_6:
+    imdpush 3 ;
+    imdpush 10 ;
+@blk_7:
+    pop ;
+    imdpush 0 ;
+}
+
